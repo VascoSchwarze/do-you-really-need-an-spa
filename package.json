@@ -1,0 +1,11 @@
+{
+	"name": "do-you-really-need-an-spa",
+	"private": true,
+	"workspaces": [
+		"examples/*",
+		"presentation"
+	],
+	"allowScripts": {
+		"esbuild@0.28.2": true
+	}
+}
