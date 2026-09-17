@@ -1,0 +1,15 @@
+.page h1 {
+  margin-bottom: 1rem;
+}
+
+.count {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}

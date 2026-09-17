@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RecipesView from "../../../components/views/RecipesView.astro";
+import { useTranslations } from "../../../i18n/utils";
+
+const lang = "en" as const;
+const t = useTranslations(lang);
+
+const recipes = (await getCollection("recipes")).sort((a, b) =>
+	a.data.title.en.localeCompare(b.data.title.en),
+);
+const categories = [...new Set(recipes.map((r) => r.data.category))].sort();
+---
+
+<BaseLayout
+	lang={lang}
+	title="All recipes - Recipe Book"
+	description={t("recipes.title")}
+	altHref="/de/rezepte/"
+>
+	<RecipesView lang={lang} recipes={recipes} categories={categories} />
+</BaseLayout>

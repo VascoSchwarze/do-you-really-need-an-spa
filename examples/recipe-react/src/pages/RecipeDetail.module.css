@@ -1,0 +1,153 @@
+.back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.image {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+.category {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 2.5rem;
+}
+
+.ingredients h2,
+.steps h2 {
+  margin-bottom: 0.75rem;
+}
+
+.calculator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.calculator label {
+  font-weight: 600;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.stepper button {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  font-size: 1rem;
+}
+
+.stepper input {
+  width: 7ch;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.3rem;
+}
+
+.ingredientList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ingredientList li {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.amount {
+  min-width: 6.5rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.hint {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.stepList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.stepList li {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 0;
+}
+
+.stepList li:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.stepList label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  cursor: pointer;
+}
+
+.stepList input {
+  margin-top: 0.2rem;
+}
+
+.done {
+  opacity: 0.55;
+}
+
+.done span:last-child {
+  text-decoration: line-through;
+}
+
+@media (max-width: 720px) {
+  .hero,
+  .content {
+    grid-template-columns: 1fr;
+  }
+}

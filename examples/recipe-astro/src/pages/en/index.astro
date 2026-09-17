@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeView from '../../components/views/HomeView.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+
+const allRecipes = await getCollection('recipes');
+const featured = allRecipes.filter((r) => r.data.featured).sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<BaseLayout lang={lang} title="Recipe Book - Cooking without compromise" description={t('home.subtitle')} altHref="/de/">
+  <HomeView lang={lang} featured={featured} />
+</BaseLayout>

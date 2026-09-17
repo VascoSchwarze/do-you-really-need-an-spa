@@ -1,0 +1,12 @@
+.button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-muted);
+  padding: 0.15rem;
+}
+
+.button.active {
+  color: var(--color-primary);
+}

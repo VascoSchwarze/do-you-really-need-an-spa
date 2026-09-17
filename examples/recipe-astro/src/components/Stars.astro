@@ -1,0 +1,12 @@
+---
+type Props = {
+	level: number;
+	lang: "de" | "en";
+};
+
+const { level, lang } = Astro.props;
+const maxStars = 5;
+const label = lang === "de" ? `Schwierigkeit ${level} von ${maxStars}` : `Difficulty ${level} of ${maxStars}`;
+---
+
+<span aria-label={label} title={label}>{"●".repeat(level)}{"○".repeat(Math.max(0, maxStars - level))}</span>

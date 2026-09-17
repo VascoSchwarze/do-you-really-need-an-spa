@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RecipeDetailView from "../../../components/views/RecipeDetailView.astro";
+
+const lang = "de" as const;
+
+export async function getStaticPaths() {
+	const recipes = await getCollection("recipes");
+	return recipes.map((recipe) => ({
+		params: { slug: recipe.id },
+		props: { recipe },
+	}));
+}
+
+const { recipe } = Astro.props;
+---
+
+<BaseLayout
+	lang={lang}
+	title={`${recipe.data.title.de} - Rezeptbuch`}
+	description={recipe.data.description.de}
+	altHref={`/en/recipes/${recipe.id}/`}
+>
+	<RecipeDetailView lang={lang} recipe={recipe} />
+</BaseLayout>

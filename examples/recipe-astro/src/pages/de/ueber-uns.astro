@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutView from '../../components/views/AboutView.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title="Über uns - Rezeptbuch" description={t('about.p1')} altHref="/en/about/">
+  <AboutView lang={lang} />
+</BaseLayout>

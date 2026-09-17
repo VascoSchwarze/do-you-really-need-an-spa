@@ -1,0 +1,163 @@
+---
+import Stars from "../Stars.astro";
+import FavoriteToggle from "../FavoriteToggle.astro";
+import PortionCalculator from "../PortionCalculator.astro";
+import { useTranslations, localizedPath } from "../../i18n/utils";
+import type { Lang } from "../../i18n/ui";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+	lang: Lang;
+	recipe: CollectionEntry<"recipes">;
+};
+
+const { lang, recipe } = Astro.props;
+const t = useTranslations(lang);
+const { data } = recipe;
+---
+
+<article class="page">
+	<a href={localizedPath(lang, "recipes")} class="back">{t("recipe.back")}</a>
+
+	<div class="hero">
+		<img src={data.image} alt={data.title[lang]} class="hero-image" />
+		<div class="hero-info">
+			<span class="category">{t(`category.${data.category}` as any)}</span>
+			<h1>{data.title[lang]}</h1>
+			<p>{data.description[lang]}</p>
+			<div class="meta-row">
+				<span>⏱ {data.cookTime} {t("recipe.minutes")}</span>
+				<Stars level={data.difficulty} lang={lang} />
+				<FavoriteToggle slug={recipe.id} title={data.title[lang]} lang={lang} />
+			</div>
+		</div>
+	</div>
+
+	<div class="content">
+		<section class="ingredients" aria-labelledby="ingredients-heading">
+			<h2 id="ingredients-heading">{t("recipe.ingredients")}</h2>
+			<PortionCalculator servings={data.servings} ingredients={data.ingredients} lang={lang} />
+		</section>
+
+		<section class="steps" aria-labelledby="steps-heading">
+			<h2 id="steps-heading">{t("recipe.steps")}</h2>
+			<p class="hint">{t("recipe.steps.hint")}</p>
+			<ol class="step-list">
+				{
+					data.steps.map((step, index) => (
+						<li>
+							<label>
+								<input type="checkbox" id={`step-${index}`} />
+								<span>{step}</span>
+							</label>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+	</div>
+</article>
+
+<script>
+	document.querySelectorAll<HTMLInputElement>('.step-list input[type="checkbox"]').forEach((checkbox) => {
+		checkbox.addEventListener("change", () => {
+			checkbox.closest("li")?.classList.toggle("done", checkbox.checked);
+		});
+	});
+</script>
+
+<style>
+	.back {
+		display: inline-block;
+		margin-bottom: 1rem;
+		color: var(--color-muted);
+		text-decoration: none;
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 2rem;
+		align-items: center;
+		margin-bottom: 2.5rem;
+	}
+
+	.hero-image {
+		width: 100%;
+		border-radius: var(--radius);
+		border: 1px solid var(--color-border);
+	}
+
+	.category {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--color-primary-dark);
+		font-weight: 600;
+	}
+
+	.meta-row {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		margin-top: 1rem;
+	}
+
+	.content {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+		gap: 2.5rem;
+	}
+
+	.ingredients h2,
+	.steps h2 {
+		margin-bottom: 0.75rem;
+	}
+
+	.hint {
+		color: var(--color-muted);
+		font-size: 0.875rem;
+	}
+
+	.step-list {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.step-list li {
+		border-bottom: 1px solid var(--color-border);
+		padding: 0.75rem 0;
+	}
+
+	.step-list li:first-child {
+		border-top: 1px solid var(--color-border);
+	}
+
+	.step-list label {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		cursor: pointer;
+	}
+
+	.step-list input {
+		margin-top: 0.2rem;
+	}
+
+	.step-list li.done {
+		opacity: 0.55;
+	}
+
+	.step-list li.done span:last-child {
+		text-decoration: line-through;
+	}
+
+	@media (max-width: 720px) {
+		.hero,
+		.content {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
