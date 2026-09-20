@@ -1,0 +1,38 @@
+title:
+  de: "Tiramisu"
+  en: "Tiramisu"
+description:
+  de: "Cremiges italienisches Dessert mit Mascarpone, Kaffee und Kakao."
+  en: "Creamy Italian dessert with mascarpone, coffee and cocoa."
+category: "Dessert"
+cookTime: 30
+difficulty: 3
+servings: 6
+featured: false
+image: "/images/recipes/tiramisu.svg"
+ingredients:
+  - name: "Mascarpone"
+    amount: 500
+    unit: "g"
+  - name: "Eier"
+    amount: 4
+    unit: "Stück"
+  - name: "Zucker"
+    amount: 100
+    unit: "g"
+  - name: "Löffelbiskuits"
+    amount: 250
+    unit: "g"
+  - name: "Espresso, kalt"
+    amount: 300
+    unit: "ml"
+  - name: "Kakaopulver"
+    amount: 2
+    unit: "EL"
+steps:
+  - "Eier trennen. Eigelb mit Zucker cremig aufschlagen, Mascarpone unterrühren."
+  - "Eiweiß steif schlagen und vorsichtig unter die Mascarponecreme heben."
+  - "Löffelbiskuits kurz in kaltem Espresso tränken und in eine Form schichten."
+  - "Eine Schicht Mascarponecreme darüber verteilen."
+  - "Vorgang wiederholen, bis Biskuits und Creme aufgebraucht sind."
+  - "Mindestens 4 Stunden kühl stellen, vor dem Servieren mit Kakao bestäuben."

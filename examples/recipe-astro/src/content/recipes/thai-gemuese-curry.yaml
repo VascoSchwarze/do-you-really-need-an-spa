@@ -1,0 +1,48 @@
+title:
+  de: "Thai Gemüse-Curry"
+  en: "Thai Vegetable Curry"
+description:
+  de: "Cremiges Kokos-Curry mit buntem Gemüse und würziger Currypaste."
+  en: "Creamy coconut curry with colorful vegetables and spicy curry paste."
+category: "Vegan"
+cookTime: 30
+difficulty: 2
+servings: 4
+featured: false
+image: "/images/recipes/thai-gemuese-curry.svg"
+ingredients:
+  - name: "Kokosmilch"
+    amount: 400
+    unit: "ml"
+  - name: "Rote Currypaste"
+    amount: 2
+    unit: "EL"
+  - name: "Brokkoli"
+    amount: 300
+    unit: "g"
+  - name: "Karotten"
+    amount: 2
+    unit: "Stück"
+  - name: "Roter Paprika"
+    amount: 1
+    unit: "Stück"
+  - name: "Zuckerschoten"
+    amount: 100
+    unit: "g"
+  - name: "Sojasauce"
+    amount: 2
+    unit: "EL"
+  - name: "Limette"
+    amount: 1
+    unit: "Stück"
+  - name: "Jasminreis"
+    amount: 300
+    unit: "g"
+steps:
+  - "Reis nach Packungsangabe kochen."
+  - "Gemüse waschen und in mundgerechte Stücke schneiden."
+  - "Currypaste in einem Topf kurz anrösten."
+  - "Kokosmilch angießen und aufkochen lassen."
+  - "Karotten zugeben und 5 Minuten köcheln, dann Brokkoli und Paprika ergänzen."
+  - "5–7 Minuten garen, bis das Gemüse bissfest ist, Zuckerschoten zuletzt zugeben."
+  - "Mit Sojasauce und Limettensaft abschmecken, mit Reis servieren."

@@ -1,0 +1,38 @@
+title:
+  de: "Spaghetti Aglio e Olio"
+  en: "Spaghetti Aglio e Olio"
+description:
+  de: "Italienischer Klassiker mit Knoblauch, Olivenöl und Chili – in 20 Minuten fertig."
+  en: "Italian classic with garlic, olive oil and chili – ready in 20 minutes."
+category: "Vegan"
+cookTime: 20
+difficulty: 2
+servings: 4
+featured: true
+image: "/images/recipes/spaghetti-aglio-e-olio.svg"
+ingredients:
+  - name: "Spaghetti"
+    amount: 400
+    unit: "g"
+  - name: "Knoblauchzehen"
+    amount: 5
+    unit: "Stück"
+  - name: "Olivenöl"
+    amount: 100
+    unit: "ml"
+  - name: "Chiliflocken"
+    amount: 1
+    unit: "TL"
+  - name: "Petersilie, gehackt"
+    amount: 4
+    unit: "EL"
+  - name: "Salz"
+    amount: 1
+    unit: "TL"
+steps:
+  - "Spaghetti in reichlich Salzwasser nach Packungsangabe al dente kochen."
+  - "Knoblauch in dünne Scheiben schneiden."
+  - "Olivenöl in einer großen Pfanne erhitzen, Knoblauch und Chiliflocken bei mittlerer Hitze goldgelb anschwitzen."
+  - "Etwas Nudelwasser abschöpfen und beiseitestellen."
+  - "Spaghetti abgießen und direkt in die Pfanne geben, mit etwas Nudelwasser und Petersilie schwenken."
+  - "Mit Salz abschmecken und sofort servieren."

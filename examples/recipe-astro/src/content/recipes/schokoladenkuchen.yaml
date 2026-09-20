@@ -1,0 +1,45 @@
+title:
+  de: "Saftiger Schokoladenkuchen"
+  en: "Moist Chocolate Cake"
+description:
+  de: "Ein dichter, schokoladiger Kuchen, der garantiert gelingt."
+  en: "A dense, chocolatey cake that always turns out perfect."
+category: "Dessert"
+cookTime: 60
+difficulty: 3
+servings: 8
+featured: true
+image: "/images/recipes/schokoladenkuchen.svg"
+ingredients:
+  - name: "Zartbitterschokolade"
+    amount: 200
+    unit: "g"
+  - name: "Butter"
+    amount: 200
+    unit: "g"
+  - name: "Zucker"
+    amount: 200
+    unit: "g"
+  - name: "Eier"
+    amount: 4
+    unit: "Stück"
+  - name: "Mehl"
+    amount: 150
+    unit: "g"
+  - name: "Backpulver"
+    amount: 1
+    unit: "TL"
+  - name: "Kakaopulver"
+    amount: 2
+    unit: "EL"
+  - name: "Prise Salz"
+    amount: 1
+    unit: "Prise"
+steps:
+  - "Backofen auf 180°C Ober-/Unterhitze vorheizen, Springform fetten."
+  - "Schokolade und Butter über einem Wasserbad schmelzen und etwas abkühlen lassen."
+  - "Zucker und Eier in einer Schüssel cremig aufschlagen."
+  - "Geschmolzene Schokoladenmasse unterrühren."
+  - "Mehl, Backpulver, Kakao und Salz sieben und vorsichtig unterheben."
+  - "Teig in die Form füllen und 35–40 Minuten backen."
+  - "Vor dem Anschneiden vollständig auskühlen lassen."

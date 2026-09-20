@@ -1,0 +1,44 @@
+title:
+  de: "Griechischer Bauernsalat"
+  en: "Greek Farmer's Salad"
+description:
+  de: "Frischer Salat mit Gurke, Tomaten, Oliven und Feta – klassisch mediterran."
+  en: "Fresh salad with cucumber, tomatoes, olives and feta – classic Mediterranean."
+category: "Vegetarisch"
+cookTime: 15
+difficulty: 1
+servings: 4
+featured: true
+image: "/images/recipes/griechischer-bauernsalat.svg"
+ingredients:
+  - name: "Gurke"
+    amount: 1
+    unit: "Stück"
+  - name: "Tomaten"
+    amount: 4
+    unit: "Stück"
+  - name: "Rote Zwiebel"
+    amount: 1
+    unit: "Stück"
+  - name: "Kalamata-Oliven"
+    amount: 100
+    unit: "g"
+  - name: "Feta"
+    amount: 200
+    unit: "g"
+  - name: "Olivenöl"
+    amount: 4
+    unit: "EL"
+  - name: "Rotweinessig"
+    amount: 1
+    unit: "EL"
+  - name: "Oregano, getrocknet"
+    amount: 1
+    unit: "TL"
+steps:
+  - "Gurke, Tomaten und rote Zwiebel in grobe Stücke schneiden."
+  - "Gemüse und Oliven in einer Schüssel vermengen."
+  - "Feta in Scheiben oder Würfel schneiden und obenauf legen."
+  - "Olivenöl und Rotweinessig verrühren und über den Salat geben."
+  - "Mit Oregano bestreuen und leicht salzen."
+  - "Sofort servieren."

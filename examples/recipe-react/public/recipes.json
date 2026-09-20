@@ -1,0 +1,482 @@
+[
+  {
+    "slug": "spaghetti-aglio-e-olio",
+    "title": "Spaghetti Aglio e Olio",
+    "description": "Italienischer Klassiker mit Knoblauch, Olivenöl und Chili – in 20 Minuten fertig.",
+    "category": "Vegan",
+    "cookTime": 20,
+    "difficulty": 2,
+    "servings": 4,
+    "featured": true,
+    "image": "/images/recipes/spaghetti-aglio-e-olio.svg",
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Knoblauchzehen",
+        "amount": 5,
+        "unit": "Stück"
+      },
+      {
+        "name": "Olivenöl",
+        "amount": 100,
+        "unit": "ml"
+      },
+      {
+        "name": "Chiliflocken",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Petersilie, gehackt",
+        "amount": 4,
+        "unit": "EL"
+      },
+      {
+        "name": "Salz",
+        "amount": 1,
+        "unit": "TL"
+      }
+    ],
+    "steps": [
+      "Spaghetti in reichlich Salzwasser nach Packungsangabe al dente kochen.",
+      "Knoblauch in dünne Scheiben schneiden.",
+      "Olivenöl in einer großen Pfanne erhitzen, Knoblauch und Chiliflocken bei mittlerer Hitze goldgelb anschwitzen.",
+      "Etwas Nudelwasser abschöpfen und beiseitestellen.",
+      "Spaghetti abgießen und direkt in die Pfanne geben, mit etwas Nudelwasser und Petersilie schwenken.",
+      "Mit Salz abschmecken und sofort servieren."
+    ]
+  },
+  {
+    "slug": "chili-con-carne",
+    "title": "Chili con Carne",
+    "description": "Herzhaftes Eintopfgericht mit Hackfleisch, Bohnen und Mais – perfekt für kalte Tage.",
+    "category": "Fleisch",
+    "cookTime": 45,
+    "difficulty": 2,
+    "servings": 4,
+    "featured": true,
+    "image": "/images/recipes/chili-con-carne.svg",
+    "ingredients": [
+      {
+        "name": "Rinderhackfleisch",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Zwiebel",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Knoblauchzehen",
+        "amount": 2,
+        "unit": "Stück"
+      },
+      {
+        "name": "Kidneybohnen (Dose, abgetropft)",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Mais (Dose, abgetropft)",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Gehackte Tomaten (Dose)",
+        "amount": 800,
+        "unit": "g"
+      },
+      {
+        "name": "Tomatenmark",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Paprikapulver",
+        "amount": 2,
+        "unit": "TL"
+      },
+      {
+        "name": "Kreuzkümmel",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Chilipulver",
+        "amount": 1,
+        "unit": "TL"
+      }
+    ],
+    "steps": [
+      "Zwiebel und Knoblauch fein würfeln.",
+      "Hackfleisch in einem großen Topf ohne Öl scharf anbraten und krümelig braten.",
+      "Zwiebel und Knoblauch zugeben und glasig dünsten.",
+      "Tomatenmark einrühren und kurz mitrösten.",
+      "Gehackte Tomaten, Gewürze, Bohnen und Mais zugeben, verrühren.",
+      "Zugedeckt bei niedriger Hitze 25 Minuten köcheln lassen, gelegentlich umrühren.",
+      "Mit Salz und Pfeffer abschmecken und servieren."
+    ]
+  },
+  {
+    "slug": "schokoladenkuchen",
+    "title": "Saftiger Schokoladenkuchen",
+    "description": "Ein dichter, schokoladiger Kuchen, der garantiert gelingt.",
+    "category": "Dessert",
+    "cookTime": 60,
+    "difficulty": 3,
+    "servings": 8,
+    "featured": true,
+    "image": "/images/recipes/schokoladenkuchen.svg",
+    "ingredients": [
+      {
+        "name": "Zartbitterschokolade",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Butter",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Zucker",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Eier",
+        "amount": 4,
+        "unit": "Stück"
+      },
+      {
+        "name": "Mehl",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Backpulver",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Kakaopulver",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Prise Salz",
+        "amount": 1,
+        "unit": "Prise"
+      }
+    ],
+    "steps": [
+      "Backofen auf 180°C Ober-/Unterhitze vorheizen, Springform fetten.",
+      "Schokolade und Butter über einem Wasserbad schmelzen und etwas abkühlen lassen.",
+      "Zucker und Eier in einer Schüssel cremig aufschlagen.",
+      "Geschmolzene Schokoladenmasse unterrühren.",
+      "Mehl, Backpulver, Kakao und Salz sieben und vorsichtig unterheben.",
+      "Teig in die Form füllen und 35–40 Minuten backen.",
+      "Vor dem Anschneiden vollständig auskühlen lassen."
+    ]
+  },
+  {
+    "slug": "thai-gemuese-curry",
+    "title": "Thai Gemüse-Curry",
+    "description": "Cremiges Kokos-Curry mit buntem Gemüse und würziger Currypaste.",
+    "category": "Vegan",
+    "cookTime": 30,
+    "difficulty": 2,
+    "servings": 4,
+    "featured": false,
+    "image": "/images/recipes/thai-gemuese-curry.svg",
+    "ingredients": [
+      {
+        "name": "Kokosmilch",
+        "amount": 400,
+        "unit": "ml"
+      },
+      {
+        "name": "Rote Currypaste",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Brokkoli",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Karotten",
+        "amount": 2,
+        "unit": "Stück"
+      },
+      {
+        "name": "Roter Paprika",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Zuckerschoten",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Sojasauce",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Limette",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Jasminreis",
+        "amount": 300,
+        "unit": "g"
+      }
+    ],
+    "steps": [
+      "Reis nach Packungsangabe kochen.",
+      "Gemüse waschen und in mundgerechte Stücke schneiden.",
+      "Currypaste in einem Topf kurz anrösten.",
+      "Kokosmilch angießen und aufkochen lassen.",
+      "Karotten zugeben und 5 Minuten köcheln, dann Brokkoli und Paprika ergänzen.",
+      "5–7 Minuten garen, bis das Gemüse bissfest ist, Zuckerschoten zuletzt zugeben.",
+      "Mit Sojasauce und Limettensaft abschmecken, mit Reis servieren."
+    ]
+  },
+  {
+    "slug": "haehnchen-gyros-bowl",
+    "title": "Hähnchen-Gyros-Bowl",
+    "description": "Mediterrane Bowl mit gewürztem Hähnchen, Reis, Tzatziki und frischem Gemüse.",
+    "category": "Fleisch",
+    "cookTime": 35,
+    "difficulty": 2,
+    "servings": 4,
+    "featured": false,
+    "image": "/images/recipes/haehnchen-gyros-bowl.svg",
+    "ingredients": [
+      {
+        "name": "Hähnchenbrustfilet",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Gyrosgewürz",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Olivenöl",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Reis",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Gurke",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Cherrytomaten",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Rote Zwiebel",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Feta",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Tzatziki",
+        "amount": 200,
+        "unit": "g"
+      }
+    ],
+    "steps": [
+      "Hähnchenbrust in Streifen schneiden und mit Gyrosgewürz und Olivenöl marinieren.",
+      "Reis nach Packungsangabe kochen.",
+      "Gurke, Tomaten und rote Zwiebel klein schneiden.",
+      "Hähnchen in einer heißen Pfanne 6–8 Minuten braten, bis es durchgegart ist.",
+      "Reis auf Schalen verteilen und mit Gemüse, Hähnchen und Feta belegen.",
+      "Mit einem Klecks Tzatziki servieren."
+    ]
+  },
+  {
+    "slug": "tiramisu",
+    "title": "Tiramisu",
+    "description": "Cremiges italienisches Dessert mit Mascarpone, Kaffee und Kakao.",
+    "category": "Dessert",
+    "cookTime": 30,
+    "difficulty": 3,
+    "servings": 6,
+    "featured": false,
+    "image": "/images/recipes/tiramisu.svg",
+    "ingredients": [
+      {
+        "name": "Mascarpone",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Eier",
+        "amount": 4,
+        "unit": "Stück"
+      },
+      {
+        "name": "Zucker",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Löffelbiskuits",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Espresso, kalt",
+        "amount": 300,
+        "unit": "ml"
+      },
+      {
+        "name": "Kakaopulver",
+        "amount": 2,
+        "unit": "EL"
+      }
+    ],
+    "steps": [
+      "Eier trennen. Eigelb mit Zucker cremig aufschlagen, Mascarpone unterrühren.",
+      "Eiweiß steif schlagen und vorsichtig unter die Mascarponecreme heben.",
+      "Löffelbiskuits kurz in kaltem Espresso tränken und in eine Form schichten.",
+      "Eine Schicht Mascarponecreme darüber verteilen.",
+      "Vorgang wiederholen, bis Biskuits und Creme aufgebraucht sind.",
+      "Mindestens 4 Stunden kühl stellen, vor dem Servieren mit Kakao bestäuben."
+    ]
+  },
+  {
+    "slug": "griechischer-bauernsalat",
+    "title": "Griechischer Bauernsalat",
+    "description": "Frischer Salat mit Gurke, Tomaten, Oliven und Feta – klassisch mediterran.",
+    "category": "Vegetarisch",
+    "cookTime": 15,
+    "difficulty": 1,
+    "servings": 4,
+    "featured": true,
+    "image": "/images/recipes/griechischer-bauernsalat.svg",
+    "ingredients": [
+      {
+        "name": "Gurke",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Tomaten",
+        "amount": 4,
+        "unit": "Stück"
+      },
+      {
+        "name": "Rote Zwiebel",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Kalamata-Oliven",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Feta",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Olivenöl",
+        "amount": 4,
+        "unit": "EL"
+      },
+      {
+        "name": "Rotweinessig",
+        "amount": 1,
+        "unit": "EL"
+      },
+      {
+        "name": "Oregano, getrocknet",
+        "amount": 1,
+        "unit": "TL"
+      }
+    ],
+    "steps": [
+      "Gurke, Tomaten und rote Zwiebel in grobe Stücke schneiden.",
+      "Gemüse und Oliven in einer Schüssel vermengen.",
+      "Feta in Scheiben oder Würfel schneiden und obenauf legen.",
+      "Olivenöl und Rotweinessig verrühren und über den Salat geben.",
+      "Mit Oregano bestreuen und leicht salzen.",
+      "Sofort servieren."
+    ]
+  },
+  {
+    "slug": "caprese-toast-mit-pesto",
+    "title": "Caprese-Toast mit Pesto",
+    "description": "Knuspriges Ciabatta mit Mozzarella, Tomaten und selbstgemachtem Pesto.",
+    "category": "Vegetarisch",
+    "cookTime": 15,
+    "difficulty": 1,
+    "servings": 2,
+    "featured": false,
+    "image": "/images/recipes/caprese-toast-mit-pesto.svg",
+    "ingredients": [
+      {
+        "name": "Ciabatta",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Mozzarella",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Tomaten",
+        "amount": 2,
+        "unit": "Stück"
+      },
+      {
+        "name": "Basilikumpesto",
+        "amount": 3,
+        "unit": "EL"
+      },
+      {
+        "name": "Olivenöl",
+        "amount": 1,
+        "unit": "EL"
+      },
+      {
+        "name": "Balsamico-Creme",
+        "amount": 1,
+        "unit": "EL"
+      }
+    ],
+    "steps": [
+      "Ciabatta längs halbieren und mit Olivenöl beträufeln.",
+      "Im Ofen oder Toaster goldbraun rösten.",
+      "Pesto auf den warmen Toast streichen.",
+      "Mozzarella und Tomaten in Scheiben schneiden und darauf verteilen.",
+      "Mit Balsamico-Creme beträufeln und sofort servieren."
+    ]
+  }
+]

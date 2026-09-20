@@ -1,46 +1,2244 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Sample Presentation</title>
+		<title>Do You Really Need an SPA?</title>
+		<style>
+			/* .reveal pre code {
+				max-height: 560px;
+			}
+			.reveal .small-code pre code {
+				font-size: 0.62em;
+				line-height: 1.35;
+			}
+			.reveal .placeholder-cell {
+				color: #ffcf5c;
+				font-style: italic;
+			}
+			.reveal ul.q-list li {
+				margin-bottom: 0.5em;
+			}
+			*/
+			.reveal .muted {
+				color: #bbb;
+				font-size: 0.7em;
+			}
+
+			.reveal .two-col {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1.5em;
+				text-align: left;
+				justify-items: center;
+				align-items: center;
+			}
+
+			.reveal .two-col.no-gap {
+				gap: 0;
+			}
+
+			/* .reveal .two-col > * {
+				overflow: hidden;
+			} */
+
+			.reveal code {
+				max-height: 34rem !important;
+				font-size: 0.9em;
+				line-height: 1.2em;
+			}
+
+			.reveal table.bench th {
+				background: #555;
+			}
+
+			/* TODO: Entfernen, wenn alles erledigt ist */
+			.reveal .todo-box {
+				border: 2px dashed #ff6b6b;
+				border-radius: 8px;
+				padding: 0.6em 1em;
+				color: #ff9d9d;
+				font-size: 0.6em;
+				text-align: left;
+				margin-top: 1em;
+			}
+
+			.reveal #php-logo.visible {
+				animation: slideAcross 3s linear;
+				transform: translateX(-100vw);
+			}
+
+			@keyframes slideAcross {
+				from {
+					transform: translateX(70vw);
+				}
+				to {
+					transform: translateX(-70vw);
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
+				<!-- ============================================================ -->
+				<!-- 1. EINLEITUNG -->
+				<!-- ============================================================ -->
+
 				<section>
-					<h1>Sample Presentation</h1>
-					<p>A starter deck built with reveal.js</p>
+					<h2 class="r-fit-text">Do You Really Need an SPA?</h2>
+					<h4 class="">
+						Wie Astro schnelle, interaktive Websites mit weniger JavaScript-Ballast ermöglicht
+					</h4>
+					<p class="muted" style="margin-top: 10rem">
+						Vasco Schwarze · JUG Saxony Day 2026 · 25.9.2026
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>Begrüßung, Titel nennen</li>
+							<li>Ankündigen: zentrale Frage des Talks — "Brauchst du wirklich eine SPA?"</li>
+						</ul>
+					</aside>
 				</section>
+
 				<section>
-					<h2>Bullet points</h2>
+					<h3>Umfrage</h3>
+					<aside class="notes">
+						<ul>
+							<li>Wer ist Web-Entwickler?</li>
+							<li>Wer arbeitet hauptsächlich mit SPAs?</li>
+							<li>Wer hat schonmal was von Astro gehört?</li>
+							<li>Wer hat Astro schon benutzt?</li>
+
+							<li>
+								Plastisches Beispiel: Marketing-Seite als React/Vue-SPA gebaut, obwohl Inhalt
+								zu 99% statisch (Text, Bilder, Kontaktformular)
+							</li>
+							<li>
+								Nutzer lädt komplette App-Runtime (React/ReactDOM, Router, State-Mgmt) nur um
+								denselben HTML-Text zu sehen, den ein Server direkt hätte ausliefern können
+							</li>
+							<li>Seite lädt seit Launch nie "live" Daten nach — reiner statischer Text</li>
+							<li>
+								Kein Strohmann gegen React: Punkt ist "Werkzeug passt oft nicht zur Aufgabe" —
+								roter Faden des Talks
+							</li>
+							<li>
+								Optional: eigene Erfahrung/Analyse via DevTools Network/Coverage-Tab
+								einbringen
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Die zentrale Frage</h3>
+					<p style="font-size: 1.4em; margin-top: 1em">
+						<em>"Brauchen wir dafür wirklich eine SPA?"</em>
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Zentrale Frage des Talks — KEIN Framework-Vergleich oder -Bashing, sondern:
+								passt die (vielleicht reflexhaft) gewählte Architektur zum tatsächlichen
+								Bedarf?
+							</li>
+							<li>
+								Antwort ist nicht immer "Nein" — gute Gründe für SPAs werden in Abschnitt 6
+								gewürdigt
+							</li>
+							<li>Plädoyer für bewusste Entscheidung</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Worum es hier NICHT geht</h3>
 					<ul>
-						<li>Use the arrow keys to navigate</li>
-						<li>Press <code>ESC</code> for the slide overview</li>
-						<li>Press <code>S</code> for speaker notes</li>
+						<li class="fragment">reines Astro-Tutorial</li>
+						<li class="fragment">
+							Framework-Vergleiche <span class="fragment">(außer ein paar Metriken)</span>
+						</li>
+						<li class="fragment">KI</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								kein reines "Astro-Tutorial" — Ziel ist Entscheidungslogik/Denkrahmen, nicht
+								Anleitung
+							</li>
+							<li>
+								Für React/Vue/Angular-Profis: Einordnung, wann das gewohnte Werkzeug passt und
+								wann nicht
+							</li>
+							<li>Für Frontend-Neulinge: Übersicht über verschiedene Konzepte</li>
+							<li>
+								Aufbau ankündigen: Rezepte-App zweimal gebaut — SPA vs. Astro, inkl. echter
+								Benchmarks/Metriken
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Wer bin ich?</h3>
+					<div class="two-col" style="margin-top: 3rem">
+						<div>
+							<img style="border-radius: 40px; height: 200px" src="assets/Profilbild.jpg" />
+							<p class="muted">Vasco Schwarze<br />Software-Entwickler<br />sciota GmbH</p>
+						</div>
+						<img style="filter: invert()" src="assets/sciota-logo.png" />
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>
+								Werdegang: Master-Abschluss HTW DD -> sciota (bereits vorher lange als
+								Werkstudent)
+							</li>
+							<li>viele Jahre Web-Entwicklung, größtenteils mit React</li>
+							<li>
+								selbst Erfahrungen mit dem Umstieg gemacht: sciota-Website umgebaut (Wordpress
+								auf Astro)
+							</li>
+							<li>mittlerweile auch andere Projekte/kleinere Websites mit Astro gebaut</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ============================================================ -->
+				<!-- 2. PROBLEMSTELLUNG + BASELINE-APP -->
+				<!-- ============================================================ -->
+
+				<section>
+					<h2>Ein kurzer Blick in die Vergangenheit...</h2>
+				</section>
+
+				<section>
+					<h3>Warum wurden SPAs zum Standard?</h3>
+					<ul>
+						<li class="fragment">flüssigere UX</li>
+						<li class="fragment">Nutzung von Hardware-Fortschritten</li>
+						<li class="fragment">geringere Serverlast</li>
+						<li class="fragment">Komponentenwiederverwendung</li>
+						<li class="fragment">riesiges Ökosystem</li>
+						<li class="fragment">Team-Gewohnheit</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>SPAs sind keine reine Modeerscheinung</li>
+							<li>flüssige, schnelle, responsive Navigation, App-ähnliches Gefühl</li>
+							<li>bessere Hardware in Endgeräten kann mehr Code selber ausführen</li>
+							<li>
+								Rendering auf Client-Seite -> geringere Serverlast, weniger Netzwerkanfragen
+							</li>
+							<li>
+								Komponentenwiederverwendung: echter Fortschritt (gekapselte UI-Bausteine statt
+								große HTML-Templates), klares mentales Modell
+							</li>
+							<li>
+								außerdem: klare Trennung von Frontend und Backend (einfachere
+								Cross-Platform/mobile Anwendungen)
+							</li>
+							<li>React/Vue/Angular-Ökosystem: ausgereiftes Tooling, riesige Community</li>
+							<li>
+								nach Etablierung: Team-Gewohnheit: Weg des geringsten Widerstands, unabhängig
+								von technischer Eignung
+							</li>
+							<li>
+								Historischer Verlauf: von SSR (PHP/JSP/Rails) über jQuery zu
+								Backbone/Angular/React-CSR — Fortschritt für hochinteraktive Apps, aber wurde
+								Standard auch für reine Content-Seiten
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Die technischen Kosten</h3>
+					<ul>
+						<li class="fragment">JS benötigt</li>
+						<li class="fragment">Größere Bundles</li>
+						<li class="fragment">Verzögertes Laden der Seite</li>
+						<li class="fragment">schwieriges SEO</li>
+						<li class="fragment">Accessibility-Einschränkungen</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>ohne JS geht gar nichts</li>
+							<li>
+								Bundlegröße skaliert schlecht, bspw, wenn ich neue
+								Dependencies/Funktionalitäten auf einer Seite hinzufüge, wird dies immer mit
+								geladen, auch wenn ich nur eine andere Seite sehen will
+							</li>
+							<li>
+								Reines CSR: Server liefert nur leeres HTML-Grundgerüst, sichtbarer Inhalt erst
+								nach Download, Parsen und Ausführen des JS-Bundles (sequentiell) (auf
+								schwachen Mobilgeräten besonders kritisch)
+							</li>
+							<li>
+								SEO
+								<ul>
+									<li>
+										Google und zunehmend auch andere Suchmaschinen können SPAs
+										crawlen/indexieren über zusätzlichen, Rendering-Schritt, klappt
+										mittlerweise fast genauso gut wie MPAs
+									</li>
+									<li>
+										ABER: nicht jeder Bot rendert JS: Social-Preview-Bots (Slack, X,
+										LinkedIn), Legacy-Tools sehen nur initiales HTML, welches leer ist
+									</li>
+									<li>
+										UND: einzelne Seiten können bei SPA nicht oder nur schwer unabhängig
+										voneinander gerankt werden, aktualisierter Inhalt wird langsamer
+										entdeckt/re-indexiert
+									</li>
+									<li>
+										Für Content-/Marketing-Seiten mit SEO-Relevanz: konkretes Risiko der
+										SPA-Architektur
+									</li>
+								</ul>
+							</li>
+							<li>
+								Accessibility
+								<ul>
+									<li>Screenreader erkennen Seitenwechsel in SPAs oft nicht automatisch</li>
+									<li>
+										Bestimmte Browser-integrierte Funktionen wie Formulare oder Historie
+										müssen in SPAs oft nachgebaut und verwaltet werden
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Lässt sich das messen?</h3>
+				</section>
+				<section data-auto-animate>
+					<h3>Lässt sich das messen?</h3>
+					<h4>Na klar!</h4>
+				</section>
+				<section data-auto-animate>
+					<h3>Lässt sich das messen?</h3>
+					<ul>
+						<li class="fragment">
+							Core Web Vitals
+							<ul>
+								<li>
+									LCP&nbsp;&nbsp;&nbsp;<span class="fragment" style="color: #5b5"
+										>&lt; 2,5sek</span
+									>
+								</li>
+								<li>
+									INP&nbsp;&nbsp;&nbsp;<span class="fragment" style="color: #5b5"
+										>&lt; 200ms</span
+									>
+								</li>
+								<li>
+									CLS&nbsp;&nbsp;&nbsp;<span class="fragment" style="color: #5b5"
+										>&lt; 0,1</span
+									>
+								</li>
+							</ul>
+						</li>
+						<li class="fragment">TTI</li>
+						<li class="fragment muted">FCP</li>
+					</ul>
+
+					<aside class="notes">
+						<ul>
+							<li>
+								Core Web Vitals = Google-definierte UX-Metriken, fließen in Suchranking ein
+								(SEO)
+							</li>
+							<li>
+								LCP (Largest Contentful Paint): Ladezeitpunkt des größten Content-Element —
+								bei CSR-SPAs abhängig von Bundle-Laden/Parsen/Ausführen + Datenladen, jede
+								Stufe addiert sich (sollte unter 2,5 sek sein)
+							</li>
+							<li>
+								INP (Interaction to Next Paint): Reaktionsgeschwindigkeit auf Klicks/Eingaben
+								— leidet bei blockiertem Hauptthread (sollte unter 200ms sein)
+							</li>
+							<li>
+								CLS (Cumulative Layout Shift): visuelle Stabilität, verschieben sich Elemente
+								nach dem ersten Render? (sollte unter 0,1 sein)
+							</li>
+							<li>
+								Alle 3 Metriken: nicht nur UX-, sondern auch Business-relevant (SEO-Ranking)
+							</li>
+							<li>
+								TTI: nicht standardisiert, aber ehrlicher UX-Wert — wann Seite zuverlässig auf
+								Eingaben reagiert (Event-Handler registriert, Hauptthread frei, keine
+								Netzwerkaktivität)
+							</li>
+							<li>
+								FCP: wann erster Inhalt gerendert wird — bei SPA trügerisch früh, falls nur
+								Spinner/leeres Grundgerüst
+							</li>
+							<li>
+								Bei SPA liegt TTI oft deutlich nach FCP (Lücke zwischen "sichtbar" und
+								"vollständig hydriert")
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-restart>
+					<h4>Warum interessiert uns das überhaupt?</h4>
+					<div class="r-stack">
+						<img class="fragment fade-in-then-semi-out" src="assets/Rakuten-Success-Story.png" />
+						<img class="fragment fade-in-then-semi-out" src="assets/BBC-Success-Story.png" />
+						<img
+							class="fragment fade-in-then-semi-out"
+							src="assets/Pinterest-Success-Story.png"
+						/>
+						<img class="fragment fade-in-then-semi-out" src="assets/Renault-Success-Story.png" />
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>Rakuten</li>
+							<li>BBC</li>
+							<li>Pinterest</li>
+							<li>Renault</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Warum interessiert uns das überhaupt?</h4>
+					<ul>
+						<li class="fragment">UX</li>
+						<li class="fragment">Conversion/Retention</li>
+						<li class="fragment">Nachhaltigkeit</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>wie gerade gezeigt, bessere UX -> mehr Geld (Conversions)</li>
+							<li>geringere Datenmengen, die übertragen werden müssen, sind nachhaltiger</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Die Baseline-App: Rezeptbuch</h3>
+					<ul class="fragment">
+						<li>Startseite mit ausgewählten Rezepten</li>
+						<li>Übersicht mit Textsuche &amp; Kategorie-Filter</li>
+						<li>Detailseite mit Portionsrechner &amp; Kochmodus-Checkliste</li>
+						<li>Favoriten-Toggle mit <i>localStorage</i>-Persistenz</li>
+					</ul>
+					<p class="muted fragment">
+						React 19 + React Router 7 · Vite-Build · ein JS-Bundle für die komplette App
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>Vergleichsbasis-App für den ganzen Talk</li>
+							<li>
+								Startseite: fast reiner Content; Übersicht: Live-Suche &amp; Kategorie-Filter
+								(clientseitig, kein Reload)
+							</li>
+							<li>
+								Detailseite: Portionsrechner (live) + abhakbare Kochmodus-Checkliste;
+								app-weit: Favoriten-Toggle mit localStorage
+							</li>
+							<li>
+								Feature-Auswahl deckt Spektrum ab: "keine Interaktivität" bis "einfache lokale
+								Interaktivität ohne geteilten State" — typisch für Content-lastige Websites
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<!-- TODO: URL stabilisieren -->
+					<iframe src="http://localhost:5174" class="r-stretch"></iframe>
+					<aside class="notes">
+						<ul>
+							<li>Durch alle Seiten kurz durchführen</li>
+							<li>Alle interaktiven Elemente vorführen</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Technischer Aufbau der Baseline</h4>
+					<pre>
+						<code data-trim data-noescape data-line-numbers class="r-stretch">
+<script type="text">default function App() {
+  return (
+    <RecipesProvider>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="rezepte" element={<Recipes />} />
+          <Route path="rezepte/:slug" element={<RecipeDetail />} />
+          <Route path="ueber-uns" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </RecipesProvider>
+  );
+}</script>
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>
+								Klassischer Aufbau: React + React Router (clientseitiges Routing), Vite-Build
+							</li>
+							<li>
+								Alle Routen aus einer <code>App</code>-Komponente/einem Bundle gerendert;
+								Server liefert immer dasselbe minimale HTML, Router entscheidet im Browser
+							</li>
+							<li>
+								Wichtig für später: jede Seite (auch simple Über-uns-Seite) lädt exakt
+								dasselbe Bundle wie die interaktivste Seite — kein Konzept von "weniger JS pro
+								Seite"
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Technischer Aufbau der Baseline</h4>
+					<pre>
+						<code data-trim data-noescape data-line-numbers="|2-3|8-23|30-34|37-43" class="r-stretch">
+<script type="text">export function RecipesProvider({ children }: { children: ReactNode }) {
+	const [recipes, setRecipes] = useState<Recipe[]>([]);
+	const [status, setStatus] = useState<Status>("loading");
+
+	useEffect(() => {
+		let cancelled = false;
+
+		fetch("/recipes.json")
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error(`Fehler beim Laden der Rezepte`);
+				}
+				return res.json() as Promise<Recipe[]>;
+			})
+			.then((data) => {
+				if (cancelled) return;
+				setRecipes(data);
+				setStatus("ready");
+			})
+			.catch(() => {
+				if (cancelled) return;
+				setStatus("error");
+			});
+
+		return () => {
+			cancelled = true;
+		};
+	}, []);
+
+	return (
+		<RecipesContext.Provider value={{ recipes, status }}>
+			{children}
+		</RecipesContext.Provider>;
+	)
+}
+
+export function useRecipes(): RecipesContextValue {
+	const ctx = useContext(RecipesContext);
+	if (!ctx) {
+		throw new Error("useRecipes must be used inside RecipesProvider");
+	}
+	return ctx;
+}</script>
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>
+								Rezeptdaten NICHT ins Bundle gebündelt, sondern via
+								<code>fetch()</code> aus statischer <code>recipes.json</code> zur Laufzeit
+								geladen — inkl. echtem Ladezustand über React Context
+							</li>
+							<li>
+								Wichtig, weil realistisch: bei echten Daten aus DB/CMS könnte man ohnehin
+								nicht statisch importieren
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Technischer Aufbau der Baseline</h4>
+					<pre>
+						<code data-trim data-noescape data-line-numbers="|2-3|7-16|18-30" class="r-stretch">
+<script type="text">export default function Home() {
+	const { recipes, status } = useRecipes();
+	const featured = recipes.filter((r) => r.featured);
+
+	return (
+		<div>
+			<section className={styles.hero}>
+				<h1>Kochen ohne Kompromisse</h1>
+				<p>
+					Eine Vielzahl durchdachter Rezepte, live berechnete Portionen
+					und ein Kochmodus, der dich Schritt für Schritt begleitet.
+				</p>
+				<Link to="/rezepte" className={styles.cta}>
+					Alle Rezepte entdecken
+				</Link>
+			</section>
+
+			<section className={styles.featured}>
+				<h2>Ausgewählte Rezepte</h2>
+				{status === "loading" && <LoadingSpinner />}
+				{status === "error" && 
+					<p role="alert">Rezepte konnten nicht geladen werden.</p>}
+				{status === "ready" && (
+					<div className={styles.grid}>
+						{featured.map((recipe) => (
+							<RecipeCard key={recipe.slug} recipe={recipe} />
+						))}
+					</div>
+				)}
+			</section>
+		</div>
+	);
+}</script>
+						</code>
+					</pre>
+					<aside class="notes"></aside>
+				</section>
+
+				<section>
+					<h4>Technischer Aufbau der Baseline</h4>
+					<pre>
+						<code data-trim data-noescape data-line-numbers="|8-9|13-19|15-18|21-28|46-55|61-77" class="r-stretch">
+<script type="text">export default function RecipeDetail() {
+	const { slug } = useParams<{ slug: string }>();
+	const { recipes, status } = useRecipes();
+	const { isFavorite, toggleFavorite } = useFavorites();
+
+	const recipe = recipes.find((r) => r.slug === slug);
+
+	const [servings, setServings] = useState<number | null>(null);
+	const [checkedSteps, setCheckedSteps] = useState<Set<number>>(() => new Set());
+
+	const activeServings = servings ?? recipe?.servings ?? 1;
+
+	const scaledIngredients = useMemo(() => {
+		if (!recipe) return [];
+		return recipe.ingredients.map((ing) => ({
+			...ing,
+			scaledAmount: scaleAmount(ing.amount, recipe.servings, activeServings),
+		}));
+	}, [recipe, activeServings]);
+
+	function toggleStep(index: number) {
+		setCheckedSteps((prev) => {
+			const next = new Set(prev);
+			if (next.has(index)) next.delete(index);
+			else next.add(index);
+			return next;
+		});
+	}
+
+	...
+
+	return (
+		<article className={styles.page}>
+
+			...
+
+			<div className={styles.content}>
+				<section 
+					className={styles.ingredients} 
+					aria-labelledby="ingredients-heading"
+				>
+					<h2 id="ingredients-heading">Zutaten</h2>
+
+					...
+
+					<ul className={styles.ingredientList}>
+						{scaledIngredients.map((ing) => (
+							<li key={ing.name}>
+								<span className={styles.amount}>
+									{ing.scaledAmount} {ing.unit}
+								</span>
+								<span>{ing.name}</span>
+							</li>
+						))}
 					</ul>
 				</section>
+
+				<section className={styles.steps} aria-labelledby="steps-heading">
+					<h2 id="steps-heading">Kochmodus</h2>
+					<p className={styles.hint}>Hake Schritte ab, während du kochst.</p>
+					<ol className={styles.stepList}>
+						{recipe.steps.map((step, index) => {
+							const checked = checkedSteps.has(index);
+							return (
+								<li key={index} className={checked ? styles.done : undefined}>
+									<label>
+										<input
+											type="checkbox"
+											checked={checked}
+											onChange={() => toggleStep(index)}
+										/>
+										<span>{step}</span>
+									</label>
+								</li>
+							);
+						})}
+					</ol>
+				</section>
+			</div>
+		</article>
+	);
+}</script>
+						</code>
+					</pre>
+					<aside class="notes"></aside>
+				</section>
+
 				<section>
-					<h2>Code blocks</h2>
-					<pre><code data-trim data-noescape>
-function greet(name) {
-  return `Hello, ${name}!`;
+					<h4>Technischer Aufbau der Baseline</h4>
+					<pre>
+						<code data-trim data-noescape data-line-numbers="|3-4|22-28|10-17|38-42" class="r-stretch">
+<script type="text">export default function Recipes() {
+	const { recipes, status } = useRecipes();
+	const [query, setQuery] = useState("");
+	const [category, setCategory] = useState("");
+
+	const categories = useMemo(
+		() => [...new Set(recipes.map((r) => r.category))].sort(), [recipes]
+	);
+
+	const filtered = useMemo(() => {
+		const q = query.trim().toLowerCase();
+		return recipes.filter((r) => {
+			const matchesQuery = q === "" || r.title.toLowerCase().includes(q);
+			const matchesCategory = category === "" || r.category === category;
+			return matchesQuery && matchesCategory;
+		});
+	}, [recipes, query, category]);
+
+	return (
+		<div className={styles.page}>
+			<h1>Alle Rezepte</h1>
+			<SearchFilterBar
+				query={query}
+				onQueryChange={setQuery}
+				category={category}
+				onCategoryChange={setCategory}
+				categories={categories}
+			/>
+
+			{status === "loading" && <LoadingSpinner />}
+			{status === "error" && 
+				<p role="alert">Rezepte konnten nicht geladen werden.</p>}
+			{status === "ready" && (
+				<>
+					<p className={styles.count}>
+						{filtered.length} {filtered.length === 1 ? "Rezept" : "Rezepte"}
+					</p>
+					<div className={styles.grid}>
+						{filtered.map((recipe) => (
+							<RecipeCard key={recipe.slug} recipe={recipe} />
+						))}
+					</div>
+					{filtered.length === 0 && <p>Keine Rezepte gefunden.</p>}
+				</>
+			)}
+		</div>
+	);
+}</script>
+						</code>
+					</pre>
+					<aside class="notes"></aside>
+				</section>
+
+				<section>
+					<h4>Technischer Aufbau der Baseline</h4>
+					<pre>
+						<code data-trim data-noescape data-line-numbers="|3-10|12-13|15-19|21-28|30-43" class="r-stretch">
+<script type="text">const STORAGE_KEY = "recipe-app:favorites";
+
+function readFavorites(): Set<string> {
+	try {
+		const raw = localStorage.getItem(STORAGE_KEY);
+		return raw ? new Set(JSON.parse(raw)) : new Set();
+	} catch {
+		return new Set();
+	}
 }
-					</code></pre>
+
+let favorites = readFavorites();
+const listeners = new Set<() => void>();
+
+function writeFavorites(next: Set<string>) {
+	favorites = next;
+	localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]));
+	listeners.forEach((listener) => listener());
+}
+
+function subscribe(listener: () => void) {
+	listeners.add(listener);
+	return () => listeners.delete(listener);
+}
+
+function getSnapshot() {
+	return favorites;
+}
+
+export function useFavorites() {
+	const favorites = useSyncExternalStore(subscribe, getSnapshot);
+
+	const toggleFavorite = useCallback((slug: string) => {
+		const next = new Set(getSnapshot());
+		if (next.has(slug)) next.delete(slug);
+		else next.add(slug);
+		writeFavorites(next);
+	}, []);
+
+	const isFavorite = useCallback((slug: string) => favorites.has(slug), [favorites]);
+
+	return { favorites, isFavorite, toggleFavorite };
+}</script>
+						</code>
+					</pre>
+					<aside class="notes"></aside>
 				</section>
+
 				<section>
-					<section>
-						<h2>Vertical slides</h2>
-						<p>Press <code>Down</code> to go deeper</p>
-					</section>
-					<section>
-						<h2>Nested slide</h2>
-						<p>This is a sub-slide.</p>
-					</section>
+					<h3>Der Output</h3>
+					<img
+						class="fragment"
+						src="assets/React-Build-Output.png"
+						style="width: 60%; vertical-align: center"
+					/>
+					<img class="fragment" src="assets/react-output-meme.jpg" style="width: 30%" />
 				</section>
+
 				<section>
-					<h2>That's it!</h2>
-					<p>Replace this deck's content in <code>index.html</code>.</p>
+					<h3>Benchmarks: Die Baseline</h3>
+					<table class="bench fragment">
+						<!-- TODO Fill with actual values -->
+						<thead>
+							<tr>
+								<th>Metrik</th>
+								<th>recipe-react (SPA)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Build-Output gesamt (<code>dist/</code>)</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+							<tr>
+								<td>Initial geladenes JS</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+							<tr>
+								<td>TTI / Lighthouse-Score</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+							<tr>
+								<td>Netzwerk-Requests (erstes Laden)</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+						</tbody>
+					</table>
+					<aside class="notes">
+						<ul>
+							<li>
+								Werte an sich sagen noch nicht viel aus, Aha-Effekt entsteht später durch
+								direkten Vergleich
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ============================================================ -->
+				<!-- 3. ASTROS PHILOSOPHIE -->
+				<!-- ============================================================ -->
+
+				<section>
+					<h2>Das muss doch besser gehen...</h2>
+				</section>
+
+				<section>
+					<h3>Ja, zum Beispiel mit</h3>
+					<img src="assets/astro-logo-light-gradient.png" style="width: 50%" />
+				</section>
+
+				<section>
+					<h3>Astros Philosophie</h3>
+					<q>Ship Zero JavaScript by Default</q>
+					<aside class="notes">
+						<ul>
+							<li>
+								Jede Astro-Komponente wird zu Build-/Request-Zeit zu statischem HTML/CSS
+								gerendert, das dafür nötige JS wird verworfen
+							</li>
+							<li>
+								Umkehrung der SPA-Grundannahme: SPA = "alles braucht JS, bis Gegenteil
+								bewiesen"; Astro = "nichts braucht JS, bis explizit als interaktiv markiert"
+							</li>
+							<li>
+								Dieser Perspektivwechsel ist der Kern der Islands Architecture (Details
+								folgen)
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Islands Architecture</h3>
+					<div
+						style="
+							display: grid;
+							grid-template-areas: &quot;header header header&quot; &quot;sidebar main main&quot; &quot;sidebar carousel carousel&quot; &quot;footer footer footer&quot;;
+							gap: 1rem;
+							width: 80%;
+							margin-left: 10%;
+						"
+					>
+						<div
+							style="
+								grid-area: header;
+								padding: 1rem;
+								border-radius: 0.5rem;
+								background-color: #484;
+							"
+						>
+							Header (interaktive Insel)
+						</div>
+						<div
+							style="
+								grid-area: sidebar;
+								padding: 1rem;
+								border-radius: 0.5rem;
+								background-color: #444;
+							"
+						>
+							Sidebar (statisch)
+						</div>
+						<div
+							style="
+								grid-area: main;
+								padding: 1rem;
+								border-radius: 0.5rem;
+								background-color: #444;
+							"
+						>
+							Hauptinhalt (statischer Text, Bilder etc.)
+						</div>
+						<div
+							style="
+								grid-area: carousel;
+								padding: 1rem;
+								border-radius: 0.5rem;
+								background-color: #844;
+							"
+						>
+							Karussell (interaktive Insel)
+						</div>
+						<div
+							style="
+								grid-area: footer;
+								padding: 1rem;
+								border-radius: 0.5rem;
+								background-color: #444;
+							"
+						>
+							Footer (statisch)
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>JS wird nur für Inseln geladen</li>
+							<li>
+								Laden inital zusammen mit dem Rest der Seite, oder auch erst, wenn das Element
+								sichtbar wird
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>viele weitere coole Features</h3>
+					<ul>
+						<li>Scoped CSS</li>
+						<li>Content Collections</li>
+						<li>Optimierte Bilder</li>
+						<li>Einbindung von JS-Framework-Komponenten</li>
+						<li>i18n</li>
+						<li>View Transitions</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Anatomie einer .astro-Datei</h3>
+					<pre data-id="code">
+						<code data-trim data-noescape data-line-numbers class="r-stretch">
+<script type="text"><!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Rezeptbuch</title>
+	</head>
+	<body>
+		<main>
+			<h1>Rezepte</h1>
+			<p>Hier steht der Inhalt</p>
+		</main>
+	</body>
+</html></script>
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>
+								.astro-Syntax ist Übermenge (engl. superset) von HTML, reines HTML ist gültige
+								Astro-Komponente
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Anatomie einer .astro-Datei</h3>
+					<pre data-id="code">
+						<code data-trim data-noescape data-line-numbers class="r-stretch">
+<script type="text">---
+---
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Rezeptbuch</title>
+	</head>
+	<body>
+		<main>
+			<h1>Rezepte</h1>
+			<p>Hier steht der Inhalt</p>
+		</main>
+	</body>
+</html></script>
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>
+								.astro-Datei hat zwei Zonen: "Frontmatter" oben zwischen drei Bindestrichen
+								(enthält JS oder sogar TS), darunter das Template (HTML-artiges Markup)
+							</li>
+							<li>Frontmatter: Ganz normales TypeScript: Imports, Typen, Props</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Anatomie einer .astro-Datei</h3>
+					<div class="two-col no-gap">
+						<pre data-id="code">
+						<code data-trim data-noescape data-line-numbers class="r-stretch language-astro">
+<script type="text">---
+const num = 3 + 4;
+---
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Rezeptbuch</title>
+	</head>
+	<body>
+		<main>
+			<h1>Rezepte</h1>
+			<p>Hier steht der Inhalt: {num}</p>
+		</main>
+	</body>
+</html></script>
+						</code>
+					</pre>
+						<pre data-id="code2">
+						<code data-trim data-noescape data-line-numbers class="r-stretch">
+<script type="text"><!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Rezeptbuch</title>
+	</head>
+	<body>
+		<main>
+			<h1>Rezepte</h1>
+			<p>Hier steht der Inhalt: 7</p>
+		</main>
+	</body>
+</html></script>
+						</code>
+					</pre>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>
+								Inhalt von Frontmatter wird zur Build-Zeit ausgeführt (nie im Browser), es
+								entsteht statisches HTML
+							</li>
+							<li>
+								Templatesyntax: Sieht aus wie JSX: <code>{}</code> betten JS-Ausdrücke ein,
+								<code>.map()</code> für Listen funktioniert identisch
+							</li>
+							<li>
+								Kleine, aber angenehme Unterschiede zu JSX: normales <code>class</code> statt
+								<code>className</code>, kein <code>key</code>-Prop bei Listen nötig
+							</li>
+							<li>
+								Kein umschließendes Fragment (<code>&lt;&gt;...&lt;/&gt;</code>) nötig — ein
+								Astro-Template darf mehrere Root-Elemente nebeneinander haben
+							</li>
+							<li>
+								Bedingtes Rendern wie in JSX:
+								<code>{condition &amp;&amp; &lt;div&gt;...&lt;/div&gt;}</code>
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Anatomie einer .astro-Datei</h3>
+					<div class="two-col no-gap">
+						<pre data-id="code">
+						<code data-trim data-noescape data-line-numbers class="r-stretch language-astro">
+<script type="text">---
+const names = ["John", "Paul"];
+---
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Rezeptbuch</title>
+	</head>
+	<body>
+		<main>
+			<h1>Rezepte</h1>
+			<ul>
+				{names.map(name => <li>{name}</li>)}
+			</ul>
+		</main>
+	</body>
+</html></script>
+						</code>
+					</pre>
+						<pre data-id="code2">
+						<code data-trim data-noescape data-line-numbers class="r-stretch">
+<script type="text"><!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Rezeptbuch</title>
+	</head>
+	<body>
+		<main>
+			<h1>Rezepte</h1>
+			<ul>
+				<li>John</li>
+				<li>Paul</li>
+			</ul>
+		</main>
+	</body>
+</html></script>
+						</code>
+					</pre>
+					</div>
+					<aside class="notes"></aside>
+				</section>
+
+				<section>
+					<h3>Kind-Inhalt einbetten mit Slots</h3>
+					<div class="two-col">
+						<div>
+							<h4 style="text-transform: none">SearchFilter.astro</h4>
+							<pre
+								style="width: 100%"
+							><code data-trim data-noescape data-line-numbers class="language-html r-stretch">&lt;div class="grid"&gt;
+  &lt;slot /&gt;
+&lt;/div&gt;</code></pre>
+						</div>
+						<div>
+							<h4 style="text-transform: none">RecipesView.astro</h4>
+							<pre
+								style="width: 100%"
+							><code data-trim data-noescape data-line-numbers class="language-astro r-stretch">&lt;SearchFilter&gt;
+  {recipes.map((r) =&gt; (
+    &lt;RecipeCard recipe={r} /&gt;
+  ))}
+&lt;/SearchFilter&gt;</code></pre>
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>
+								<code>&lt;slot /&gt;</code> markiert die Stelle, an der Kind-Inhalt eingefügt
+								wird — Pendant zu <code>{children}</code> in React
+							</li>
+							<li>
+								Komponenten werden wie normale HTML-Tags verwendet, Props als Attribute
+								(<code>categories={categories}</code>)
+							</li>
+							<li>
+								Hier konkret: <code>RecipesView.astro</code> reicht die gerenderten
+								<code>RecipeCard</code>s als Kind-Inhalt an <code>SearchFilter</code> durch —
+								die Insel selbst rendert die Karten nicht neu, sie blendet sie nur ein/aus
+							</li>
+							<li>
+								Damit ist die Syntax-Grundlage gelegt, ab jetzt echter Code aus der
+								Beispiel-App
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Props</h3>
+					<div>
+						<pre><code data-trim data-noescape data-line-numbers class="language-astro r-stretch">---
+type Props = {
+  lang: Lang;
+  recipe: Recipe;
+}
+
+const { lang, recipes } = Astro.props;
+---</code></pre>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>
+								Astro.props enthält die übergebenen Props, Typdefinition nur bei Verwendung
+								von TypeScript notwendig, aber enorm hilfreich
+							</li>
+							<li>
+								Damit ist die Syntax-Grundlage gelegt, ab jetzt echter Code aus der
+								Beispiel-App
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="assets/new-php-logo.png" id="php-logo" class="fragment" />
+					<aside class="notes">
+						<ul>
+							<li>
+								HTML-Templates mit dynamischem Code darin, der auf dem Server ausgeführt und
+								zu HTML gerendert wird
+							</li>
+							<li>"Herzlichen Glückwunsch, wir haben PHP neu erfunden"</li>
+							<li>
+								keine reine Wiederholung, Islands sind gezielter/granularer als klassisches
+								PHP-Rendering, aber die Grundrichtung "zurück zum Server" stimmt
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="assets/server-client-meme.jpg" />
+				</section>
+
+				<section>
+					<h3>Einordnung</h3>
+					<ul>
+						<li><strong>Qwik</strong> — Resumability</li>
+						<li><strong>htmx</strong> — HTML-Attribute statt Komponenten</li>
+						<li><strong>Next.js</strong> — Partial Prerendering / RSC</li>
+						<li><strong>Astro</strong> — unser Beispiel heute</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Einordnung für Kenner/Skeptiker ("ist das ein Astro-Werbe-Talk?"): Astro ist
+								nicht die einzige/erste Umsetzung dieser Idee
+							</li>
+							<li>
+								Qwik: "Resumability" — serialisiert State ins HTML, setzt Ausführung im Client
+								fort, ganz ohne Hydration-Schritt
+							</li>
+							<li>
+								htmx: kein Komponentenmodell, HTML-Attribute
+								(<code>hx-get</code>/<code>hx-post</code>) laden Server-HTML-Fragmente nach,
+								kein virtueller DOM
+							</li>
+							<li>
+								Next.js: Partial Prerendering / React Server Components — Server Components
+								laufen nur serverseitig, nie client-seitiges JS
+							</li>
+							<li>
+								Astro als zugängliches Beispiel für größeres Denkmuster gewählt — nicht die
+								einzig richtige Antwort
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Rezeptbuch App - Version 2</h3>
+					<aside class="notes">
+						<ul>
+							<li>
+								dieselbe App (Seiten, Features, Daten) noch einmal mit Astro gebaut — einziger
+								Unterschied ist die Architektur
+							</li>
+							<li>
+								Wichtig für Einordnung der Benchmarks: Astro hier im rein statischen Modus
+								(Static Site Generation, kein Server zur Laufzeit)
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ============================================================ -->
+				<!-- 4. ISLANDS ARCHITECTURE + ASTRO-NACHBAU (HERZSTÜCK) -->
+				<!-- ============================================================ -->
+
+				<section>
+					<h3>Such-/Filterleiste — Markup</h3>
+					<div class="ref-path">examples/recipe-astro/src/components/SearchFilter.astro</div>
+					<pre
+						class="tiny-code"
+					><code data-trim data-noescape class="language-html">&lt;div class="search-filter" data-count-one={t('recipes.count.one')} ...&gt;
+  &lt;input type="search" data-search-input placeholder={t('recipes.search.placeholder')} /&gt;
+  &lt;div class="chips" role="group"&gt;
+    &lt;button data-category-chip=""&gt;{t('recipes.filter.all')}&lt;/button&gt;
+    {categories.map((c) =&gt; (
+      &lt;button data-category-chip={c}&gt;{t(`category.${c}`)}&lt;/button&gt;
+    ))}
+  &lt;/div&gt;
+  &lt;p class="count" data-count&gt;{totalCount} ...&lt;/p&gt;
+  &lt;div class="grid" data-results&gt;&lt;slot /&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  import '../scripts/search-filter';
+&lt;/script&gt;</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>
+								Normale Astro-Komponente: server-seitig gerenderte Attribute (Übersetzungen,
+								Kategorien), Suchlogik selbst noch nicht vorhanden
+							</li>
+							<li>
+								Nur <code>data-*</code>-Attribute als Anknüpfungspunkte fürs JS
+								(<code>data-search-input</code>, <code>data-category-chip</code>,
+								<code>data-results</code>, <code>data-count</code>)
+							</li>
+							<li>
+								Rezeptkarten kommen fertig gerendert via <code>&lt;slot /&gt;</code> — Insel
+								blendet nur ein/aus, rendert nicht neu
+							</li>
+							<li>
+								<code>&lt;script&gt;</code>-Tag importiert Logik aus separater Datei (nächste
+								Folie)
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Such-/Filterleiste — Logik</h3>
+					<div class="ref-path">examples/recipe-astro/src/scripts/search-filter.ts</div>
+					<pre
+						class="small-code"
+					><code data-trim data-noescape class="language-typescript">function applyFilter() {
+  const query = input.value.trim().toLowerCase();
+  let visibleCount = 0;
+  for (const card of cards) {
+    const matchesQuery = query === "" || card.dataset.title!.toLowerCase().includes(query);
+    const matchesCategory = activeCategory === "" || card.dataset.category === activeCategory;
+    const visible = matchesQuery && matchesCategory;
+    card.hidden = !visible;
+    if (visible) visibleCount++;
+  }
+  countEl.textContent = `${visibleCount} ...`;
+}
+
+input.addEventListener("input", applyFilter);</code></pre>
+					<p style="font-size: 0.7em">Sofort aktiv — kein Hydration-Delay nötig</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Vollständige Kernlogik: kein virtueller DOM, direkte DOM-Manipulation (<code
+									>card.hidden = !visible</code
+								>) statt Neu-Rendern
+							</li>
+							<li>
+								Skript liest Karten direkt aus DOM (<code>data-title</code>,
+								<code>data-category</code>)
+							</li>
+							<li>
+								Kein Framework-Komponentenmodell → keine Hydration-Timing-Direktiven wie
+								<code>client:load</code> nötig; normales <code>&lt;script&gt;</code>-Tag
+								reicht (Astro bündelt automatisch pro Seite)
+							</li>
+							<li>Punkt bleibt: sofort verfügbar — es gibt schlicht nichts zu "hydrieren"</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Portionsrechner</h3>
+					<div class="ref-path">examples/recipe-astro/src/scripts/portion-calculator.ts</div>
+					<pre
+						class="small-code"
+					><code data-trim data-noescape class="language-typescript">function scaleAmount(amount: number, baseServings: number, targetServings: number): string {
+  const scaled = (amount * targetServings) / baseServings;
+  const rounded = Math.round(scaled * 100) / 100;
+  if (Number.isInteger(rounded)) return String(rounded);
+  return rounded.toFixed(rounded &lt; 10 ? 2 : 1).replace(/\.?0+$/, "");
+}
+
+// ... render() aktualisiert Input + alle .amount-Elemente
+decrement?.addEventListener("click", () => render(Math.max(1, currentServings() - 1)));
+increment?.addEventListener("click", () => render(currentServings() + 1));</code></pre>
+					<p style="font-size: 0.7em">Weiter unten auf der Seite — trotzdem sofort aktiv</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Skaliert Zutatenmengen live bei Änderung der Portionsanzahl — reine Mathematik
+								+ DOM-Updates, kein Framework
+							</li>
+							<li>
+								<code>scaleAmount</code> rundet sinnvoll; Basismenge/-portionen kommen als
+								<code>data-*</code>-Attribute vom Server, Skript liest nur aus
+							</li>
+							<li>
+								Ursprünglich <code>client:visible</code> (Intersection Observer) geplant, da
+								Rechner weiter unten sitzt
+							</li>
+							<li>
+								Entfällt bei Vanilla-JS: kein Framework-Runtime-Overhead pro Insel → kein
+								Kostenvorteil durch verzögerte Aktivierung, Skript läuft immer sofort
+							</li>
+							<li>
+								Merke: bei echten Framework-Islands (Preact/React/Vue) wäre
+								<code>client:visible</code> weiterhin sinnvoll
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Favoriten-Toggle</h3>
+					<div class="ref-path">examples/recipe-astro/src/scripts/favorite-toggle.ts</div>
+					<pre
+						class="small-code"
+					><code data-trim data-noescape class="language-typescript">function initFavoriteToggle(button: HTMLButtonElement) {
+  const slug = button.dataset.slug;
+  const sync = () => {
+    const active = readFavorites().has(slug);
+    button.textContent = active ? '♥' : '♡';
+    button.classList.toggle('is-active', active);
+  };
+  button.addEventListener('click', () => {
+    const favorites = readFavorites();
+    favorites.has(slug) ? favorites.delete(slug) : favorites.add(slug);
+    writeFavorites(favorites);
+    sync();
+  });
+  sync();
+}</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>
+								Liest/schreibt direkt in <code>localStorage</code> — kein globales
+								State-Management (Context/Redux) nötig
+							</li>
+							<li>
+								Jede Button-Instanz synchronisiert unabhängig ihren Zustand
+								(<code>sync()</code>); mehrere Instanzen möglich, komplett unabhängig
+								voneinander
+							</li>
+							<li>
+								Vergleich zu React: dort zentraler Hook
+								(<code>useFavorites</code>/<code>useSyncExternalStore</code>) als Single
+								Source of Truth nötig
+							</li>
+							<li>
+								Bei Astro-Islands nicht nötig: localStorage selbst ist die Source of Truth,
+								kein geteilter In-Memory-State
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Kochmodus-Checkliste</h3>
+					<div class="ref-path">
+						examples/recipe-astro/src/components/views/RecipeDetailView.astro
+					</div>
+					<pre
+						class="small-code"
+					><code data-trim data-noescape class="language-typescript">&lt;script&gt;
+  document.querySelectorAll('.step-list input[type="checkbox"]')
+    .forEach((checkbox) =&gt; {
+      checkbox.addEventListener("change", () =&gt; {
+        checkbox.closest("li")?.classList.toggle("done", checkbox.checked);
+      });
+    });
+&lt;/script&gt;</code></pre>
+					<p style="font-size: 0.75em">Reines Vanilla-JS, inline im <code>.astro</code>-File</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Simpelstes der vier Features — braucht nicht mal eigene Insel-Komponente,
+								Script steht inline in <code>RecipeDetailView.astro</code>
+							</li>
+							<li>
+								Fünf Zeilen JS reichen: Checkbox abhaken → CSS-Klasse
+								<code>.done</code> (durchgestrichen, reduzierte Deckkraft)
+							</li>
+							<li>
+								Zeigt Kern der "Zero JS by default"-Idee am deutlichsten: keine
+								Komponenten-Architektur, kein State-Container nötig — einfach ein Skript dort,
+								wo es gebraucht wird
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Design-Entscheidung: Warum kein Framework für die Islands?</h3>
+					<div class="two-col">
+						<div>
+							<h4 style="margin-top: 0">Was viele Tutorials tun</h4>
+							<p style="font-size: 0.78em">React als Standard-Insel — mehr JS als nötig</p>
+						</div>
+						<div>
+							<h4 style="margin-top: 0">Was hier gemacht wurde</h4>
+							<p style="font-size: 0.78em">Vanilla-JS — 0 KB Framework-Runtime</p>
+						</div>
+					</div>
+					<p class="joke">
+						Für "Checkbox abhaken" muss man kein 40-KB-Framework mit der Kettensäge auspacken.
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Wird in vielen Tutorials übergangen: Astro unterstützt
+								React/Vue/Svelte/Solid/Preact als Islands, Tutorials greifen reflexartig zu
+								React
+							</li>
+							<li>
+								Widerspricht Astros Kernidee: jede React-Insel bringt React+ReactDOM-Runtime
+								mit (~40+ KB gzipped), egal wie simpel die Interaktion; Preact (~4 KB) wäre
+								schon besser
+							</li>
+							<li>
+								Hier noch weiter gegangen: für alle vier Features keine
+								Component-Hydration/virtueller DOM nötig — reine DOM-Manipulation via
+								<code>addEventListener</code>
+							</li>
+							<li>Ergebnis: 0 KB Framework-Runtime für die gesamte App</li>
+							<li>
+								Echte Abwägung im Projekt: Bundle-Größe vs.
+								Team-Vertrautheit/Entwicklungsgeschwindigkeit — bei komplexeren Features (z.
+								B. Formulare) kann React-Insel pragmatischer sein
+							</li>
+							<li>
+								Punkt: nicht "Vanilla ist immer richtig", sondern bewusste Abwägung statt
+								Reflex — dieselbe Frage wie im gesamten Talk
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Content Collections: typisierte Daten</h3>
+					<div class="ref-path">examples/recipe-astro/src/content.config.ts</div>
+					<pre
+						class="small-code"
+					><code data-trim data-noescape class="language-typescript">const recipes = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/content/recipes" }),
+  schema: z.object({
+    title: z.object({ de: z.string(), en: z.string() }),
+    category: z.enum(["Vegetarisch", "Fleisch", "Dessert", "Vegan"]),
+    cookTime: z.number().positive(),
+    difficulty: z.number().int().min(1).max(5),
+    servings: z.number().int().positive(),
+    ingredients: z.array(z.object({
+      name: z.string(), amount: z.number().positive(), unit: z.string(),
+    })),
+    // ...
+  }),
+});</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Astros eingebautes System für typisierte, strukturierte Inhalte</li>
+							<li>
+								Hinweis: ursprünglich Markdown/Frontmatter geplant, tatsächlich YAML gewählt
+								(rein strukturierte Daten ohne Fließtext) — Prinzip identisch
+							</li>
+							<li>
+								<code>loader</code> (<code>glob</code>) liest Dateien ein, Zod-Schema
+								definiert Felder/Typen inkl. verschachtelter Objekte, Enums,
+								Validierungsregeln
+							</li>
+							<li>
+								Vorteil ggü. SPA (loses JSON ohne Validierung): Build-Zeit-Garantie fürs
+								Format + volle TypeScript-Typinferenz über <code>getCollection()</code>
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Bei Schema-Verstoß: Build-Fehler statt Runtime-Fehler</h3>
+					<div class="ref-path">examples/recipe-astro/src/content/recipes/tiramisu.yaml</div>
+					<pre class="small-code"><code data-trim data-noescape class="language-yaml">title:
+  de: "Tiramisu"
+  en: "Tiramisu"
+category: "Dessert"
+cookTime: 30
+difficulty: 3
+servings: 6
+ingredients:
+  - name: "Mascarpone"
+    amount: 500
+    unit: "g"</code></pre>
+					<p style="font-size: 0.75em">
+						Tippfehler in <code>category</code> → Build schlägt fehl, nicht Laufzeit
+					</p>
+					<p class="joke">Der Compiler flext jetzt mit Rechtschreibprüfung.</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Gedankenspiel: Tippfehler <code>category: "Desert"</code> statt "Dessert"
+								(Schema erlaubt nur 4 feste Werte)
+							</li>
+							<li>
+								Bei klassischem JSON ohne Validierung (React-Baseline): Fehler fällt erst zur
+								Laufzeit auf (leere Übersetzung/"undefined"), evtl. erst wenn Nutzer sich
+								beschwert
+							</li>
+							<li>
+								Mit Zod-Schema in Astro: Build schlägt fehl mit klarer Fehlermeldung (Feld +
+								Datei)
+							</li>
+							<li>
+								"Shift left"-Prinzip: Fehler von Laufzeit (beim Kunden) zu Build-Zeit (beim
+								Entwickler) verschoben
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Gescoptes CSS — ganz ohne Namenskonvention</h3>
+					<div class="two-col">
+						<div>
+							<h4 style="margin-top: 0">React: CSS Modules</h4>
+							<div class="ref-path" style="font-size: 0.55em">RecipeCard.tsx</div>
+							<pre
+								class="tiny-code"
+							><code data-trim data-noescape class="language-tsx">import styles from "./RecipeCard.module.css";
+// ...
+&lt;article className={styles.card}&gt;</code></pre>
+						</div>
+						<div>
+							<h4 style="margin-top: 0">Astro: automatisch</h4>
+							<div class="ref-path" style="font-size: 0.55em">RecipeCard.astro</div>
+							<pre
+								class="tiny-code"
+							><code data-trim data-noescape class="language-astro">&lt;article class="recipe-card"&gt;
+&lt;style&gt;
+  .recipe-card { /* nur hier gültig */ }
+&lt;/style&gt;</code></pre>
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>
+								Angenehmes, oft übersehenes Feature: <code>&lt;style&gt;</code>-Blöcke in
+								<code>.astro</code>-Dateien automatisch auf ihre Komponente beschränkt — kein
+								CSS-Module/BEM/CSS-in-JS nötig
+							</li>
+							<li>
+								Technisch: Build-Zeit generiert eindeutigen Daten-Attribut-Selektor
+								(<code>data-astro-cid-xxxxx</code>) pro Komponente, transparent im Quellcode
+							</li>
+							<li>
+								Vergleich React-Baseline: braucht CSS Modules (<code>*.module.css</code> +
+								<code>styles.klassenname</code>) als zusätzliche Konvention
+							</li>
+							<li>
+								Illustration: mehrere Astro-Seiten mit identischen Klassennamen
+								(<code>.hero</code>, <code>.grid</code>, <code>.page</code>) zeigen, ohne
+								Kollisionen
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>i18n: Deutsch/Englisch-Routing</h3>
+					<div class="ref-path">examples/recipe-astro/astro.config.ts</div>
+					<pre
+						class="small-code"
+					><code data-trim data-noescape class="language-typescript">export default defineConfig({
+  output: "static",
+  i18n: {
+    defaultLocale: "de",
+    locales: ["de", "en"],
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
+    },
+  },
+});</code></pre>
+					<p style="font-size: 0.75em">
+						<code>/de/rezepte/…</code> vs. <code>/en/recipes/…</code> — auch Pfade übersetzt
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Astros eingebautes i18n-Routing: jede Seite unter sprachspezifischem Präfix
+								(<code>/de/</code>, <code>/en/</code>)
+							</li>
+							<li>
+								<code>prefixDefaultLocale: true</code> gibt auch Deutsch ein Präfix;
+								<code>redirectToDefaultLocale: true</code> leitet <code>/</code> auf
+								<code>/de/</code> um
+							</li>
+							<li>
+								Bemerkenswert: auch URL-Segmente selbst übersetzt (<code>/de/rezepte/</code>
+								vs. <code>/en/recipes/</code>) via <code>localizedPath()</code>-Helper
+							</li>
+							<li>
+								Fallback: <code>useTranslations(lang)</code> fällt bei fehlenden Keys auf
+								Standardsprache zurück — verhindert leere Textstellen
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Benchmark-Vergleich: der Payoff</h3>
+					<table class="bench">
+						<thead>
+							<tr>
+								<th>Metrik</th>
+								<th>recipe-react (SPA)</th>
+								<th>recipe-astro</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Build-Output gesamt</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+							<tr>
+								<td>Initial geladenes JS</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+							<tr>
+								<td>TTI / Lighthouse-Score</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+							<tr>
+								<td>Netzwerk-Requests</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+						</tbody>
+					</table>
+					<aside class="notes">
+						<ul>
+							<li>
+								Payoff-Moment: dieselbe Tabelle wie Baseline (Abschnitt 2), jetzt mit Astro
+								gegenübergestellt (Werte aus COMPARISON.md)
+							</li>
+							<li>
+								Unterschiede explizit interpretieren: initial JS bei Astro drastisch kleiner
+								(wenige KB Insel-Skripte statt Framework-Runtime)
+							</li>
+							<li>
+								Build-Größe trotz mehrerer vorgerenderter Seiten (pro Sprache/Route) nicht
+								größer, evtl. kleiner als SPA-Bundle
+							</li>
+							<li>
+								Weniger Netzwerk-Requests: kein <code>fetch()</code> für Daten, kein separater
+								Bundle-Request — Daten schon im HTML
+							</li>
+							<li>
+								Nuance: lokale Messungen ohne echte Netzwerklatenz — relative Differenz
+								bleibt/wird mit echter Latenz eher größer
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ============================================================ -->
+				<!-- 5. VOM CLIENT ZUM SERVER -->
+				<!-- ============================================================ -->
+
+				<section>
+					<h3>Die App wächst</h3>
+					<p class="lead">Astro kann mehr als nur statisch</p>
+					<p class="joke">
+						Server rendert wieder HTML zur Laufzeit? Herzlichen Glückwunsch, wir haben PHP neu
+						erfunden. 🐘
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Überleitung: "Zero JS by default" heißt nicht Verzicht auf dynamische
+								Anforderungen
+							</li>
+							<li>
+								Zeigen, wie App wachsen könnte, wenn reines SSG nicht mehr reicht (z. B.
+								Bewertungen, häufig wechselnde Daten)
+							</li>
+							<li>
+								Den PHP-Insider-Witz laut vortragen und kurz stehen lassen — danach direkt
+								einordnen: Islands sind gezielter/granularer als klassisches PHP-Rendering,
+								der Gag hat trotzdem einen wahren Kern
+							</li>
+						</ul>
+						<div class="todo-box">
+							[[HINWEIS: Abschnitt 5 im Beispielprojekt (recipe-astro) noch NICHT umgesetzt —
+							läuft komplett statisch, ohne Adapter/Server-Endpoints/Server
+							Islands/&lt;Image/&gt;. Folgende Folien sind Platzhalter, noch mit echtem Code zu
+							befüllen. Bis dahin nur konzeptionell/anhand Astro-Doku vortragen.]]
+						</div>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Image Optimization: <code>&lt;Image /&gt;</code></h3>
+					<div class="todo-box">[[Platzhalter — Beispielprojekt ergänzen]]</div>
+					<ul style="font-size: 0.75em">
+						<li>Automatische Formatkonvertierung (z. B. WebP/AVIF)</li>
+						<li>Automatische Größenanpassung je Anzeigekontext</li>
+						<li>Direkter Effekt auf LCP, da Bilder oft das größte Content-Element sind</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								<code>&lt;Image /&gt;</code> (aus <code>astro:assets</code>) optimiert Bilder
+								beim Build: WebP/AVIF-Konvertierung, passende Größenvarianten, automatische
+								<code>width</code>/<code>height</code> gegen Layout-Shifts
+							</li>
+							<li>
+								Effekt auf LCP: größtes Content-Element ist oft ein Bild —
+								kleinere/komprimierte Datei wirkt sich direkt auf LCP aus
+							</li>
+							<li>
+								Demo-Projekt nutzt aktuell nur kleine SVG-Platzhalter → noch kein echtes
+								Vorher/Nachher-Beispiel; nach Ergänzung mit echten Zahlen befüllen, nicht
+								erfinden
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>SSR aktivieren</h3>
+					<div class="todo-box">[[Platzhalter — Beispielprojekt ergänzen]]</div>
+					<ul style="font-size: 0.85em">
+						<li><code>output: 'static'</code> → <code>output: 'server'</code></li>
+						<li>Deployment-Adapter zwingend nötig</li>
+						<li>Kein reines Static-Hosting mehr möglich</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Konzeptionell: Umstieg via <code>output</code>-Option in
+								<code>astro.config.ts</code> von <code>'static'</code> auf
+								<code>'server'</code>/<code>'hybrid'</code>
+							</li>
+							<li>
+								Kein reiner Konfigurationsschalter: zwingend Deployment-Adapter nötig
+								(<code>@astrojs/node</code>, <code>-vercel</code>, <code>-netlify</code>,
+								<code>-cloudflare</code>)
+							</li>
+							<li>
+								Folge: reines statisches Hosting reicht nicht mehr — laufende
+								Serverinstanz/Edge-Function nötig, Implikationen für
+								Pipeline/Kosten/Skalierung
+							</li>
+						</ul>
+						<div class="todo-box">
+							[[Sobald Beispielprojekt um SSR erweitert: konkrete Lessons Learned ergänzen —
+							insbesondere Caching-Verhalten beim Wechsel statisch → serverseitig.]]
+						</div>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Server Endpoints</h3>
+					<div class="todo-box">[[Platzhalter — Beispielprojekt ergänzen]]</div>
+					<p style="font-size: 0.8em">Beispiel: Rezept-Bewertung serverseitig entgegennehmen</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Konzeptionell: Astro erlaubt reine API-Endpoints unter
+								<code>src/pages/</code> (Datei exportiert
+								<code>GET</code>/<code>POST</code>-Funktion, gibt
+								<code>Response</code> zurück) — nur im
+								<code>server</code>/<code>hybrid</code>-Modus
+							</li>
+							<li>
+								Naheliegendes Beispiel: Endpoint für Rezept-Bewertungen, serverseitig
+								verarbeitet
+							</li>
+							<li>Slide erst mit echtem Code befüllen, sobald Endpoint implementiert ist</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Server Islands: <code>server:defer</code></h3>
+					<div class="todo-box">[[Platzhalter — Beispielprojekt ergänzen]]</div>
+					<p style="font-size: 0.8em">Serverseitig gerendert, verzögert nachgeladen</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Konzeptionell: <code>server:defer</code> rendert eine Komponente weiter
+								serverseitig, entkoppelt aber ihre Auslieferung vom Rest der Seite
+							</li>
+							<li>
+								Restliche Seite bleibt sofort verfügbar/schnell; Server-Island lädt asynchron
+								nach, sobald fertig berechnet
+							</li>
+							<li>
+								Beispiel für unsere App: "gerade beliebte Rezepte" oder Live-Zähler (zu häufig
+								wechselnd für Build-Zeit-Rendering)
+							</li>
+						</ul>
+						<div class="todo-box">
+							[[Sobald umgesetzt: konkretes Detail zu Ladeverhalten/Platzhalter-Rendering
+							ergänzen — mind. 2 "Lessons Learned" über Abschnitt 5 verteilt einbauen.]]
+						</div>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Reale Use Cases für SSR / Server Islands</h3>
+					<ul style="font-size: 0.85em">
+						<li>Authentifizierung &amp; personalisierte Inhalte</li>
+						<li>CAPTCHAs</li>
+						<li>Häufig wechselnde, nicht vorab bekannte Daten</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Allgemeines Konzeptwissen, unabhängig vom fehlenden Beispielcode</li>
+							<li>
+								Reale Gründe für SSR/Server Islands: Auth (personalisierte Inhalte), CAPTCHAs
+								(müssen serverseitig validiert werden), zu häufig/individuell wechselnde
+								Inhalte (Dashboard, Warenkorb, Live-Preise)
+							</li>
+							<li>
+								Wichtige Botschaft: Wechsel zu "gezielt dynamisch" nur für die Teile, die es
+								brauchen — nicht die ganze App
+							</li>
+							<li>
+								Vorteil ggü. "alles ist SPA": inkrementell genau so viel Dynamik hinzufügen
+								wie nötig
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Ökosystem: Deployment-Adapter</h3>
+					<ul style="font-size: 0.85em">
+						<li>Node.js (eigener Server)</li>
+						<li>Vercel, Netlify, Cloudflare (Edge/Serverless)</li>
+						<li>Adapter kapseln die Plattform-spezifische Integration</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Astro bietet offizielle Adapter für gängige Plattformen: Node.js-Server,
+								Vercel, Netlify, Cloudflare Pages/Workers
+							</li>
+							<li>
+								Adapter übernimmt plattformspezifische Integration (Request-Handling,
+								Response-Streaming)
+							</li>
+							<li>
+								Anwendungscode bleibt plattformunabhängig — Deployment-Ziel wechselbar ohne
+								Code-Anpassung
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ============================================================ -->
+				<!-- 6. Fragenkatalog -->
+				<!-- ============================================================ -->
+
+				<section>
+					<h3>Wann SPAs weiterhin die bessere Wahl sind</h3>
+					<ul style="font-size: 0.85em">
+						<li>Komplexe, hochinteraktive Anwendungen mit viel Client-State</li>
+						<li>Dashboards, Editoren, Tools mit dauerhaftem "App-Charakter"</li>
+						<li>Content-Charakter: Ausnahme, nicht Regel</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Astro und MPAs generell sind kein Wundermittel</li>
+							<li>
+								Basierend auf den 4 Fragen: SPAs bleiben beste Wahl für komplexe,
+								hochinteraktive Apps mit viel geteiltem Client-State (Dashboards, Editoren,
+								PM-Tools) — "App-Charakter" statt "Content-Charakter"
+							</li>
+							<li>
+								Keine Ausnahme von der Kernthese, sondern logische Konsequenz: bei
+								Figma/Linear-artigen Tools ist "sehr viel JS" die ehrliche Antwort → SPA ist
+								dann konsequent richtig, keine schlechte Gewohnheit
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Ein Fragenkatalog</h3>
+					<p class="lead">
+						Wie viel der Seite ist tatsächlich interaktiv gegenüber reinem Content?
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>expliziter Fragenkatalog für jede Framework-Wahl, unabhängig vom Ergebnis</li>
+							<li>
+								Grundlegendste Frage: Marketing-Seite/Blog/Doku/Rezepte-App = überwiegend
+								reiner Content → spricht für Islands-/Content-first-Ansatz
+							</li>
+							<li>
+								Grafik-Editor/PM-Board/Dashboard = fast alles interaktiv → klassische SPA
+								passt besser
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Frage 2</h3>
+					<p class="lead">
+						Wird clientseitiger Zustand benötigt, der über viele Komponenten hinweg geteilt und
+						synchron gehalten werden muss?
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Anknüpfung an Favoriten-Toggle-Vergleich: braucht es geteilten, synchronen
+								State über mehrere UI-Bereiche (z. B. Warenkorb-Icon, Formular mit
+								Cross-Feld-Validierung)?
+							</li>
+							<li>
+								Islands sind bewusst isoliert — Stärke bei einfachen lokalen Interaktionen,
+								Schwäche bei viel geteiltem State
+							</li>
+							<li>
+								Lösbar auch mit Islands (Astro empfiehlt Nanostores), aber ab gewissem
+								Komplexitätsgrad ist SPA mit eingebautem State-Management oft pragmatischer
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Frage 3</h3>
+					<p class="lead">
+						Ist SEO bzw. Time-to-First-Content ein kritischer Faktor für das Projekt?
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Öffentliche Inhalte (Marketing, Blog, Produktseiten, Doku): fast immer "ja" →
+								spricht für Content-first-Ansatz
+							</li>
+							<li>
+								Interne Tools/Admin/Login-geschützt: SEO irrelevant → Argument entfällt,
+								andere Kriterien entscheiden
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Frage 4</h3>
+					<p class="lead">
+						Besteht bereits eine erhebliche Investition in ein bestehendes SPA-Setup?
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Pragmatische Frage, geht in technischen Diskussionen oft unter: Team-Know-how,
+								gewachsene Codebasis, Tooling-Integrationen haben realen
+								Wert/Umstellungskosten
+							</li>
+							<li>
+								Technisch "besseres" Paradigma rechtfertigt nicht automatisch Neuentwicklung
+							</li>
+							<li>
+								Abwägung: junges Projekt + starke Antworten auf Fragen 1-3 →
+								Architektur-Vorteil überwiegt; etabliertes Produkt/eingespieltes Team → oft
+								anders
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Rückverweis auf Abschnitt 3</h3>
+					<p class="lead" style="font-size: 1em">Dieselbe Logik gilt für Qwik, htmx, RSC …</p>
+					<p class="muted" style="margin-top: 1em">
+						Framework zweitrangig — Entscheidungsprozess nicht
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Bogen zurück zu Abschnitt 3 (Qwik, htmx, Next.js PPR/RSC): Fragenkatalog ist
+								tool-unabhängig formuliert
+							</li>
+							<li>
+								Wichtigste Botschaft: nicht ein Tool gegen ein anderes tauschen, sondern
+								Entscheidungsprozess selbst bewusster gestalten
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ============================================================ -->
+				<!-- 7. FAZIT & TAKE-AWAYS -->
+				<!-- ============================================================ -->
+
+				<section>
+					<h3>Zum Schluss: die Zahlen nebeneinander</h3>
+					<table class="bench">
+						<thead>
+							<tr>
+								<th>Metrik</th>
+								<th>recipe-react (SPA)</th>
+								<th>recipe-astro</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Initial geladenes JS</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+							<tr>
+								<td>TTI / Lighthouse-Score</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+								<td class="placeholder-cell">[[MESSUNG EINFÜGEN]]</td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="muted">Dieselbe App. Dieselben Features. Ein fundamental anderer Payload.</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Visueller Abschluss: zentrale Zahlen aus Abschnitt 2+4 nebeneinander,
+								reduziert auf JS-Payload + TTI/Lighthouse-Score
+							</li>
+							<li>Werte identisch zu vorherigen Tabellen einsetzen, sobald Messung final</li>
+							<li>
+								Kurz &amp; pointiert: "Dieselbe App, dieselbe Features/Daten, fundamental
+								anderer Payload" → danach zu Take-aways
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Take-away 1</h3>
+					<p class="lead" style="font-size: 1.05em">
+						Die entscheidende Frage ist nicht "Welches Framework?", sondern
+						<strong>"Wie viel JavaScript braucht diese Seite tatsächlich?"</strong>
+					</p>
+					<p class="muted">
+						— unabhängig davon, ob am Ende Astro, Qwik oder etwas anderes zum Einsatz kommt.
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Wichtigster, framework-unabhängiger Take-away — betont und langsam vortragen
+							</li>
+							<li>
+								Kernbotschaft ist NICHT "benutzt Astro", sondern: erst Interaktivitätsbedarf
+								klären, dann Framework wählen
+							</li>
+							<li>Framework-Wahl ist die Antwort auf die Frage, nicht der Ausgangspunkt</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Take-aways 2 &amp; 3</h3>
+					<ul style="font-size: 0.9em">
+						<li><strong>Islands Architecture:</strong> partielle Interaktivität</li>
+						<li><strong>Fragenkatalog:</strong> Werkzeug für die nächste Entscheidung</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Take-away 2: Islands Architecture ist ein Denk-Muster, kein Astro-exklusives
+								Feature — als Bewertungsraster unabhängig vom Tool nutzbar
+							</li>
+							<li>
+								Take-away 3: Fragenkatalog aus Abschnitt 6 (Interaktivitätsanteil, geteilter
+								State, SEO-Kritikalität, bestehende Investition) als konkret
+								wiederverwendbares Werkzeug — tatsächlich anwenden, nicht nur Theorie
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Call to Action</h3>
+					<p class="lead" style="font-size: 1em">
+						Ordnet euer nächstes Projekt anhand des Fragenkatalogs ein.
+					</p>
+					<p class="muted" style="margin-top: 0.8em">
+						Oder: probiert den Islands-Ansatz an einer Stelle aus.
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>Konkreter, niedrigschwelliger CTA statt vagem Appell</li>
+							<li>
+								Option A: aktuelles/nächstes Projekt anhand der 4 Fragen aus Abschnitt 6
+								durchgehen (wenige Minuten)
+							</li>
+							<li>
+								Option B: Islands-Ansatz an kleiner, isolierter Stelle testen (z. B. wenig
+								interaktive Unterseite ohne volles Framework-Bundle)
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ============================================================ -->
+				<!-- 8. Q&A -->
+				<!-- ============================================================ -->
+
+				<section>
+					<h2>Fragen?</h2>
+					<p class="muted">Vasco Schwarze · [[Kontakt/Social-Handle ergänzen]]</p>
+					<p class="muted" style="margin-top: 2em">
+						Code &amp; Vergleich: <code>examples/recipe-react</code> ·
+						<code>examples/recipe-astro</code> ·
+						<code>COMPARISON.md</code>
+					</p>
+					<aside class="notes">
+						<ul>
+							<li>TODO: Kontaktmöglichkeit (E-Mail/Social/GitHub) noch ergänzen</li>
+							<li>TODO: Link ergänzen</li>
+						</ul>
+					</aside>
 				</section>
 			</div>
 		</div>
