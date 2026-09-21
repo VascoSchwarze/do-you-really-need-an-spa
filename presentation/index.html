@@ -1105,7 +1105,7 @@ const num = 3 + 4;
 
 				<section data-auto-animate>
 					<h3>Anatomie einer .astro-Datei</h3>
-					<div class="two-col no-gap">
+					<div class="two-col no-gap" style="grid-template-columns: 3fr 2fr">
 						<pre data-id="code">
 						<code data-trim data-noescape data-line-numbers class="r-stretch language-astro">
 <script type="text">---
@@ -1206,7 +1206,7 @@ type Props = {
   recipe: Recipe;
 }
 
-const { lang, recipes } = Astro.props;
+const { lang, recipe } = Astro.props;
 ---</code></pre>
 					</div>
 					<aside class="notes">
@@ -1247,10 +1247,12 @@ const { lang, recipes } = Astro.props;
 				<section>
 					<h3>Einordnung</h3>
 					<ul>
-						<li><strong>Qwik</strong> — Resumability</li>
-						<li><strong>htmx</strong> — HTML-Attribute statt Komponenten</li>
-						<li><strong>Next.js</strong> — Partial Prerendering / RSC</li>
-						<li><strong>Astro</strong> — unser Beispiel heute</li>
+						<li><strong>Qwik</strong>&nbsp;&nbsp;-&nbsp;&nbsp;Resumability</li>
+						<li>
+							<strong>htmx</strong>&nbsp;&nbsp;-&nbsp;&nbsp;HTML-Attribute statt Komponenten
+						</li>
+						<li><strong>Next.js</strong>&nbsp;&nbsp;-&nbsp;&nbsp;Partial Prerendering / RSC</li>
+						<li><strong>Astro</strong>&nbsp;&nbsp;-&nbsp;&nbsp;unser Beispiel heute</li>
 					</ul>
 					<aside class="notes">
 						<ul>
@@ -1279,6 +1281,10 @@ const { lang, recipes } = Astro.props;
 					</aside>
 				</section>
 
+				<!-- ============================================================ -->
+				<!-- 4. ASTRO-NACHBAU BEISPIELAPP (SSG) -->
+				<!-- ============================================================ -->
+
 				<section>
 					<h3>Rezeptbuch App - Version 2</h3>
 					<aside class="notes">
@@ -1295,9 +1301,666 @@ const { lang, recipes } = Astro.props;
 					</aside>
 				</section>
 
-				<!-- ============================================================ -->
-				<!-- 4. ISLANDS ARCHITECTURE + ASTRO-NACHBAU (HERZSTÜCK) -->
-				<!-- ============================================================ -->
+				<section>
+					<h2>File-based routing</h2>
+					<img class="fragment" src="assets/Astro-Structure.png" style="width: 20%" />
+					<aside class="notes">
+						<ul>
+							<li>filebasiertes Routing erklären, am Beispiel der Rezepteapp</li>
+							<li>
+								Wenn viel Sprachen unterstützt werden sollen, kann Struktur auch in Bezug auf
+								Sprachen dynamisch aufgebaut werden
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<!-- TODO: URL stabilisieren -->
+					<iframe src="http://localhost:4321/de/ueber-uns" class="r-stretch"></iframe>
+					<aside class="notes">
+						<ul>
+							<li>Diese "Über uns" Seite wird zuerst im Detail vorgestellt</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate="">
+					<h3>Pages</h3>
+					<pre><code data-trim data-noescape data-line-numbers class="language-astro"><script type="text">---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutView from '../../components/views/AboutView.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title="Über uns" description={t('about.p1')} >
+  <AboutView lang={lang} />
+</BaseLayout>
+</script></code></pre>
+					<p class="muted">pages/de/ueber-uns.astro</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Normale Astro-Komponente: server-seitig gerenderte Attribute (Übersetzungen)
+							</li>
+							<li>
+								alle Pages sehen so aus, teils werden noch mehr Variablen oben in Frontmatter
+								definiert
+							</li>
+							<li>Verwendet zwei Astro-Komponenten: BaseLayout und AboutView</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Pages</h3>
+					<pre><code data-trim data-noescape data-line-numbers="14-16" class="language-astro"><script type="text">---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeView from '../../components/views/HomeView.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de' as const;
+const t = useTranslations(lang);
+
+const allRecipes = await getCollection('recipes');
+const featured = allRecipes.filter((r) => r.data.featured).sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<BaseLayout lang={lang} title="Rezeptbuch" description={t('home.subtitle')}>
+  <HomeView lang={lang} featured={featured} />
+</BaseLayout>
+</script></code></pre>
+					<p class="muted">pages/de/index.astro</p>
+					<aside class="notes"></aside>
+				</section>
+
+				<section>
+					<h3>Layout</h3>
+					<pre><code data-trim data-noescape data-line-numbers="|1-12|14-29|15,29|19|20|21|24|25-27|31-51" class="language-astro"><script type="text">---
+import Header from "../components/Header.astro";
+import type { Lang } from "../i18n/ui";
+
+type Props = {
+	lang: Lang;
+	title: string;
+	description: string;
+};
+
+const { lang, title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+	</head>
+	<body>
+		<Header lang={lang} />
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--color-bg: #fdfaf5;
+		--color-primary-dark: #8f4224;
+	}
+
+	body {
+		background: var(--color-bg);
+		line-height: 1.5;
+	}
+
+	a {
+		color: var(--color-primary-dark);
+	}
+
+	main {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 2rem 1.5rem 4rem;
+	}
+</style>
+</script></code></pre>
+					<p class="muted">layouts/BaseLayout.astro</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Astro-Komponente mit slot, rendert Kind-Inhalt (View-Komponente) innerhalb des
+								grundlegenden Layouts
+							</li>
+							<li>sorgt für einheitliches Aussehen</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Über uns - Inhalt</h3>
+					<pre
+						data-id="code"
+					><code data-trim data-noescape data-line-numbers="|1-11|13-17|19-27" class="language-astro"><script type="text">---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+type Props = {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="page">
+  <h1>{t('about.title')}</h1>
+  <p>{t('about.p1')}</p>
+  <p>{t('about.p2')}</p>
+</div>
+
+<style>
+  .page {
+    max-width: 640px;
+  }
+
+  .page h1 {
+    margin-bottom: 1rem;
+  }
+</style>
+</script></code></pre>
+					<p class="muted">components/views/AboutView.astro</p>
+					<aside class="notes"></aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Scoped CSS</h3>
+					<div class="two-col no-gap" style="grid-template-columns: 2fr 3fr">
+						<pre
+							data-id="code"
+						><code data-trim data-noescape data-line-numbers="13-27" class="language-astro"><script type="text">---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+type Props = {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="page">
+  <h1>{t('about.title')}</h1>
+  <p>{t('about.p1')}</p>
+  <p>{t('about.p2')}</p>
+</div>
+
+<style>
+  .page {
+    max-width: 640px;
+  }
+
+  .page h1 {
+    margin-bottom: 1rem;
+  }
+</style>
+</script></code></pre>
+						<pre
+							style="width: 100%"
+						><code data-trim data-noescape class="language-html"><script type="text"><div class="page" data-astro-cid-gtkanwr>
+	<h1 data-astro-cid-gtkanwr>Über uns</h1>
+	<p data-astro-cid-gtkanwr>
+		Rezeptbuch ist ein ...
+	</p>
+	<p data-astro-cid-gtkanwr>
+		Beide Varianten bieten ...
+	</p>
+</div>
+
+
+<style>
+.page[data-astro-cid-gtkanwr] {
+	max-width: 640px;
+}
+
+.page[data-astro-cid-gtkanwr] h1[data-astro-cid-gtkanwr] {
+	margin-bottom: 1rem;
+}
+</style></script></code></pre>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>
+								CSS, was nicht explizit als global markiert ist, ist lokal gescoped und leaked
+								nicht in andere Komponenten
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>i18n</h3>
+					<pre
+						data-id="code"
+					><code data-trim data-noescape data-line-numbers="2-3,10" class="language-astro"><script type="text">---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+type Props = {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="page">
+  <h1>{t('about.title')}</h1>
+  <p>{t('about.p1')}</p>
+  <p>{t('about.p2')}</p>
+</div>
+
+<style>
+  .page {
+    max-width: 640px;
+  }
+
+  .page h1 {
+    margin-bottom: 1rem;
+  }
+</style>
+</script></code></pre>
+					<p class="muted">components/views/AboutView.astro</p>
+					<aside class="notes"></aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>i18n</h3>
+					<pre
+						data-id="code2"
+					><code data-trim data-noescape data-line-numbers ><script type="text">export const ui = {
+	de: {
+		"nav.home": "Start",
+		"nav.recipes": "Rezepte",
+		"nav.about": "Über uns",
+		"home.cta": "Alle Rezepte entdecken",
+		"recipes.title": "Alle Rezepte",
+		"recipes.search.placeholder": "Rezept suchen…",
+		...
+	},
+	en: {
+		"nav.home": "Home",
+		"nav.recipes": "Recipes",
+		"nav.about": "About",
+		"home.cta": "Discover all recipes",
+		"recipes.title": "All recipes",
+		"recipes.search.placeholder": "Search recipes…",
+		...
+	},
+} as const;
+
+export type Lang = keyof typeof ui; // "de | "en"
+</script></code></pre>
+					<p class="muted">i18n/ui.ts</p>
+					<aside class="notes">
+						<ul>
+							<li>Alle UI-sichtbaren Strings hier definiert, abhängig von Locale</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>i18n</h3>
+					<pre
+						data-id="code3"
+					><code data-trim data-noescape data-line-numbers class="language-js" ><script type="text">import { ui } from "./ui";
+				
+export function useTranslations(lang) {
+	return function t(key) {
+		return ui[lang][key] ?? ui["de"][key];
+	};
+}</script></code></pre>
+					<p class="muted">i18n/utils.ts</p>
+					<aside class="notes">
+						<ul>
+							<li>Hilfsfunktion, die Labels der gewünschten Sprache zurückgibt</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-restart>
+					<h3>Content Collections</h3>
+					<pre><code data-trim data-noescape data-line-numbers="|1,5|6|7-30|33"><script type="text">import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
+
+const recipes = defineCollection({
+	loader: glob({ pattern: "**/*.yaml", base: "./src/content/recipes" }),
+	schema: z.object({
+		title: z.object({
+			de: z.string(),
+			en: z.string(),
+		}),
+		description: z.object({
+			de: z.string(),
+			en: z.string(),
+		}),
+		category: z.enum(["Vegetarisch", "Fleisch", "Dessert", "Vegan"]),
+		cookTime: z.number().positive(),
+		difficulty: z.number().int().min(1).max(5),
+		servings: z.number().int().positive(),
+		featured: z.boolean().default(false),
+		image: z.string(),
+		ingredients: z.array(
+			z.object({
+				name: z.string(),
+				amount: z.number().positive(),
+				unit: z.string(),
+			}),
+		),
+		steps: z.array(z.string()),
+	}),
+});
+
+export const collections = { recipes };
+</script></code></pre>
+					<p class="muted">content.config.ts</p>
+					<aside class="notes">
+						<ul>
+							<li>(Typsichere) Definition einer Content Collection</li>
+							<li>
+								Validierung des korrekten Formats zur Build-Zeit, wenn inkorrektes Format ->
+								Build schlägt fehl
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3>Content Collections</h3>
+					<!-- TODO Bild der Filestruktur im Content folder-->
+				</section>
+				<section data-auto-animate>
+					<h3>Content Collections</h3>
+					<!-- TODO Code-Ausschnitt eines Content-Files (Rezepts) -->
+				</section>
+
+				<section data-auto-animate>
+					<h3>Content Collections</h3>
+					<pre><code data-trim data-noescape data-line-numbers="10-14" class="language-astro"><script type="text">---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeView from '../../components/views/HomeView.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de' as const;
+const t = useTranslations(lang);
+
+const allRecipes = await getCollection('recipes');
+const featured = 
+	allRecipes
+		.filter((r) => r.data.featured)
+		.sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<BaseLayout lang={lang} title="Rezeptbuch" description={t('home.subtitle')}>
+  <HomeView lang={lang} featured={featured} />
+</BaseLayout>
+</script></code></pre>
+					<p class="muted">pages/de/index.astro</p>
+					<aside class="notes"></aside>
+				</section>
+
+				<section>
+					<h3>Dynamische Generierung von Seiten</h3>
+					<pre><code data-trim data-noescape data-line-numbers="|8-14|16|19-26" class="language-astro"><script type="text">---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RecipeDetailView from "../../../components/views/RecipeDetailView.astro";
+
+const lang = "de" as const;
+
+export async function getStaticPaths() {
+	const recipes = await getCollection("recipes");
+	return recipes.map((recipe) => ({
+		params: { slug: recipe.id },
+		props: { recipe },
+	}));
+}
+
+const { recipe } = Astro.props;
+---
+
+<BaseLayout
+	lang={lang}
+	title={`${recipe.data.title.de} - Rezeptbuch`}
+	description={recipe.data.description.de}
+>
+	<RecipeDetailView lang={lang} recipe={recipe} />
+</BaseLayout>
+</script></code></pre>
+					<p class="muted">pages/de/rezepte/[slug].astro</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Astro-Konvention: Exportierte Funktion getStaticPaths gibt Liste von
+								Seitenkonfigs zurück, die für dynamische Seiten verwendet werden
+							</li>
+							<li>Pfad-Parameter für dynamischen Pfad, dynamische Props für Seiteninhalt</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<!-- TODO: Vergleich nebeneinander: Rezept-Content-Files und erzeugte Output-Files -->
+				</section>
+
+				<section>
+					<h3>Und jetzt...</h3>
+					<h3 class="fragment">...Zeit für Interaktivität!</h3>
+				</section>
+
+				<section>
+					<h3>Kochmodus-Checkliste</h3>
+					<pre><code data-trim data-noescape>
+						<script type="text">
+							---
+import Stars from "../Stars.astro";
+import FavoriteToggle from "../FavoriteToggle.astro";
+import PortionCalculator from "../PortionCalculator.astro";
+import { useTranslations, localizedPath } from "../../i18n/utils";
+import type { Lang } from "../../i18n/ui";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+	lang: Lang;
+	recipe: CollectionEntry<"recipes">;
+};
+
+const { lang, recipe } = Astro.props;
+const t = useTranslations(lang);
+const { data } = recipe;
+---
+
+<article class="page">
+	<a href={localizedPath(lang, "recipes")} class="back">{t("recipe.back")}</a>
+
+	<div class="hero">
+		<img src={data.image} alt={data.title[lang]} class="hero-image" />
+		<div class="hero-info">
+			<span class="category">{t(`category.${data.category}` as any)}</span>
+			<h1>{data.title[lang]}</h1>
+			<p>{data.description[lang]}</p>
+			<div class="meta-row">
+				<span>⏱ {data.cookTime} {t("recipe.minutes")}</span>
+				<Stars level={data.difficulty} lang={lang} />
+				<FavoriteToggle slug={recipe.id} title={data.title[lang]} lang={lang} />
+			</div>
+		</div>
+	</div>
+
+	<div class="content">
+		<section class="ingredients" aria-labelledby="ingredients-heading">
+			<h2 id="ingredients-heading">{t("recipe.ingredients")}</h2>
+			<PortionCalculator servings={data.servings} ingredients={data.ingredients} lang={lang} />
+		</section>
+
+		<section class="steps" aria-labelledby="steps-heading">
+			<h2 id="steps-heading">{t("recipe.steps")}</h2>
+			<p class="hint">{t("recipe.steps.hint")}</p>
+			<ol class="step-list">
+				{
+					data.steps.map((step, index) => (
+						<li>
+							<label>
+								<input type="checkbox" id={`step-${index}`} />
+								<span>{step}</span>
+							</label>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+	</div>
+</article>
+
+<script>
+	document.querySelectorAll<HTMLInputElement>('.step-list input[type="checkbox"]').forEach((checkbox) => {
+		checkbox.addEventListener("change", () => {
+			checkbox.closest("li")?.classList.toggle("done", checkbox.checked);
+		});
+	});
+	<!-- TODO: Syntax fixen -->
+</script>
+
+<style>
+	.back {
+		display: inline-block;
+		margin-bottom: 1rem;
+		color: var(--color-muted);
+		text-decoration: none;
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 2rem;
+		align-items: center;
+		margin-bottom: 2.5rem;
+	}
+
+	.hero-image {
+		width: 100%;
+		border-radius: var(--radius);
+		border: 1px solid var(--color-border);
+	}
+
+	.category {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--color-primary-dark);
+		font-weight: 600;
+	}
+
+	.meta-row {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		margin-top: 1rem;
+	}
+
+	.content {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+		gap: 2.5rem;
+	}
+
+	.ingredients h2,
+	.steps h2 {
+		margin-bottom: 0.75rem;
+	}
+
+	.hint {
+		color: var(--color-muted);
+		font-size: 0.875rem;
+	}
+
+	.step-list {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.step-list li {
+		border-bottom: 1px solid var(--color-border);
+		padding: 0.75rem 0;
+	}
+
+	.step-list li:first-child {
+		border-top: 1px solid var(--color-border);
+	}
+
+	.step-list label {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		cursor: pointer;
+	}
+
+	.step-list input {
+		margin-top: 0.2rem;
+	}
+
+	.step-list li.done {
+		opacity: 0.55;
+	}
+
+	.step-list li.done span:last-child {
+		text-decoration: line-through;
+	}
+
+	@media (max-width: 720px) {
+		.hero,
+		.content {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+						</script>
+					</code></pre>
+					<p style="font-size: 0.75em">Reines Vanilla-JS, inline im <code>.astro</code>-File</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								Simpelstes der vier Features — braucht nicht mal eigene Insel-Komponente,
+								Script steht inline in <code>RecipeDetailView.astro</code>
+							</li>
+							<li>
+								Fünf Zeilen JS reichen: Checkbox abhaken → CSS-Klasse
+								<code>.done</code> (durchgestrichen, reduzierte Deckkraft)
+							</li>
+							<li>
+								Zeigt Kern der "Zero JS by default"-Idee am deutlichsten: keine
+								Komponenten-Architektur, kein State-Container nötig — einfach ein Skript dort,
+								wo es gebraucht wird
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- ---------------------------------------- -->
+				<!-- ---------------------------------------- -->
 
 				<section>
 					<h3>Such-/Filterleiste — Markup</h3>
@@ -1464,41 +2127,6 @@ increment?.addEventListener("click", () => render(currentServings() + 1));</code
 							<li>
 								Bei Astro-Islands nicht nötig: localStorage selbst ist die Source of Truth,
 								kein geteilter In-Memory-State
-							</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<h3>Kochmodus-Checkliste</h3>
-					<div class="ref-path">
-						examples/recipe-astro/src/components/views/RecipeDetailView.astro
-					</div>
-					<pre
-						class="small-code"
-					><code data-trim data-noescape class="language-typescript">&lt;script&gt;
-  document.querySelectorAll('.step-list input[type="checkbox"]')
-    .forEach((checkbox) =&gt; {
-      checkbox.addEventListener("change", () =&gt; {
-        checkbox.closest("li")?.classList.toggle("done", checkbox.checked);
-      });
-    });
-&lt;/script&gt;</code></pre>
-					<p style="font-size: 0.75em">Reines Vanilla-JS, inline im <code>.astro</code>-File</p>
-					<aside class="notes">
-						<ul>
-							<li>
-								Simpelstes der vier Features — braucht nicht mal eigene Insel-Komponente,
-								Script steht inline in <code>RecipeDetailView.astro</code>
-							</li>
-							<li>
-								Fünf Zeilen JS reichen: Checkbox abhaken → CSS-Klasse
-								<code>.done</code> (durchgestrichen, reduzierte Deckkraft)
-							</li>
-							<li>
-								Zeigt Kern der "Zero JS by default"-Idee am deutlichsten: keine
-								Komponenten-Architektur, kein State-Container nötig — einfach ein Skript dort,
-								wo es gebraucht wird
 							</li>
 						</ul>
 					</aside>
