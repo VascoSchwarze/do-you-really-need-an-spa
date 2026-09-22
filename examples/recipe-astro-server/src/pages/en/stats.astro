@@ -1,0 +1,22 @@
+---
+export const prerender = false;
+
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import StatsView from "../../components/views/StatsView.astro";
+import { getGlobalStats, rankByViews } from "../../server/recipe-stats";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = "en" as const;
+const t = useTranslations(lang);
+
+const recipes = await getCollection("recipes");
+const stats = getGlobalStats();
+const topViewed = rankByViews(recipes.map((r) => ({ slug: r.id, title: r.data.title[lang] })))
+	.filter((r) => r.views > 0)
+	.slice(0, 5);
+---
+
+<BaseLayout lang={lang} title="Stats - Recipe Book" description={t("stats.description")} altHref="/de/statistik/">
+	<StatsView lang={lang} requestedAt={new Date()} stats={stats} topViewed={topViewed} />
+</BaseLayout>

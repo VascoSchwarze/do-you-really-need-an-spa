@@ -22,7 +22,7 @@ const { data } = recipe;
 	<div class="hero">
 		<img src={data.image} alt={data.title[lang]} class="hero-image" />
 		<div class="hero-info">
-			<span class="category">{t(`category.${data.category}` as any)}</span>
+			<span class="category">{t(`category.${data.category}`)}</span>
 			<h1>{data.title[lang]}</h1>
 			<p>{data.description[lang]}</p>
 			<div class="meta-row">

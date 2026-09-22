@@ -1,0 +1,18 @@
+---
+export const prerender = true;
+
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RecipesView from '../../../components/views/RecipesView.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = 'de' as const;
+const t = useTranslations(lang);
+
+const recipes = (await getCollection('recipes')).sort((a, b) => a.data.title.de.localeCompare(b.data.title.de));
+const categories = [...new Set(recipes.map((r) => r.data.category))].sort();
+---
+
+<BaseLayout lang={lang} title="Alle Rezepte - Rezeptbuch" description={t('recipes.title')} altHref="/en/recipes/">
+  <RecipesView lang={lang} recipes={recipes} categories={categories} />
+</BaseLayout>

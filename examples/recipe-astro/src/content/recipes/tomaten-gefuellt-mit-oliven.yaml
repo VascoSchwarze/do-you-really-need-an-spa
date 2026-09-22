@@ -1,0 +1,33 @@
+title:
+  de: "Tomaten gefüllt mit Oliven"
+  en: "Tomatoes Stuffed with Olives"
+description:
+  de: "Ofentomaten gefüllt mit Couscous, Oliven und Kräutern der Provence."
+  en: "Baked tomatoes filled with couscous, olives, and herbes de Provence."
+category: "Vegan"
+cookTime: 25
+difficulty: 2
+servings: 4
+featured: false
+image: "/images/recipes/tomaten-gefuellt-mit-oliven.jpg"
+ingredients:
+  - name: "Tomaten, groß"
+    amount: 8
+    unit: "Stück"
+  - name: "Couscous"
+    amount: 4
+    unit: "EL"
+  - name: "Gemischte Oliven"
+    amount: 180
+    unit: "g"
+  - name: "Olivenöl"
+    amount: 4
+    unit: "EL"
+  - name: "Kräuter der Provence"
+    amount: 1
+    unit: "EL"
+steps:
+  - "Den Ofen auf 180 °C vorheizen."
+  - "Von den Tomaten einen Deckel abschneiden. Das Fruchtfleisch auslöffeln, würfeln und mit Couscous, zerkleinerten Oliven und Kräutern der Provence mischen. Salzen und pfeffern."
+  - "Die Tomaten füllen und in eine Auflaufform setzen. Mit Olivenöl beträufeln und 15 Minuten backen."
+  - "Warm oder kalt servieren."

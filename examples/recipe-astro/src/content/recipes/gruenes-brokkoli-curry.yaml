@@ -1,0 +1,32 @@
+title:
+  de: "Grünes Brokkoli-Curry"
+  en: "Green Broccoli Curry"
+description:
+  de: "Mildes Kokos-Curry mit Brokkoli, Tofu und Erbsen - vegan und in unter 20 Minuten fertig."
+  en: "A mild coconut curry with broccoli, tofu, and peas - vegan and ready in under 20 minutes."
+category: "Vegan"
+cookTime: 16
+difficulty: 1
+servings: 4
+featured: false
+image: "/images/recipes/gruenes-brokkoli-curry.jpg"
+ingredients:
+  - name: "Brokkoli"
+    amount: 500
+    unit: "g"
+  - name: "Kokosmilch"
+    amount: 500
+    unit: "ml"
+  - name: "Erbsen, frisch oder TK"
+    amount: 200
+    unit: "g"
+  - name: "Tofu, Natur"
+    amount: 200
+    unit: "g"
+  - name: "Currypulver"
+    amount: 3
+    unit: "EL"
+steps:
+  - "Den Brokkoli in Stücke schneiden und mit Kokosmilch und Curry in einem Schmortopf mischen."
+  - "Salzen, pfeffern und 10 Minuten bei milder Hitze unter Rühren köcheln lassen."
+  - "Die Erbsen und den in Würfel geschnittenen Tofu hinzufügen und noch 1 Minute kochen."

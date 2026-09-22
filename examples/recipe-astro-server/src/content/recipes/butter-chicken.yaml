@@ -1,0 +1,74 @@
+title:
+  de: "Kurz mariniertes Butter Chicken"
+  en: "Quick-Marinated Butter Chicken"
+description:
+  de: "Cremiges, kurz mariniertes Butter-Hähnchen in würziger Tomatensauce."
+  en: "Creamy, briefly marinated butter chicken in a spiced tomato sauce."
+category: "Fleisch"
+cookTime: 75
+difficulty: 4
+servings: 4
+featured: true
+image: "/images/recipes/butter-chicken.jpg"
+ingredients:
+  - name: "Garam Masala, gemahlen"
+    amount: 2.5
+    unit: "TL"
+  - name: "Chilipulver"
+    amount: 1.5
+    unit: "TL"
+  - name: "Korianderpulver"
+    amount: 1
+    unit: "TL"
+  - name: "Knoblauchzehen"
+    amount: 4
+    unit: "Stück"
+  - name: "Ingwer, gehackt"
+    amount: 1
+    unit: "EL"
+  - name: "Hähnchenschenkel oder -brustfilet, grob geschnitten"
+    amount: 700
+    unit: "g"
+  - name: "Naturjoghurt"
+    amount: 200
+    unit: "g"
+  - name: "Kardamompulver"
+    amount: 0.25
+    unit: "TL"
+  - name: "Zitronensaft"
+    amount: 1
+    unit: "TL"
+  - name: "Zwiebel"
+    amount: 1
+    unit: "Stück"
+  - name: "Ghee"
+    amount: 3
+    unit: "EL"
+  - name: "Gewürznelken"
+    amount: 4
+    unit: "Stück"
+  - name: "Grüne Kardamomsamen"
+    amount: 3
+    unit: "Stück"
+  - name: "Nelkenpulver"
+    amount: 0.25
+    unit: "TL"
+  - name: "Tomaten"
+    amount: 4
+    unit: "Stück"
+  - name: "Geschälte Tomaten, Dose"
+    amount: 400
+    unit: "g"
+  - name: "Honig"
+    amount: 4
+    unit: "TL"
+  - name: "Kurkumapulver"
+    amount: 1
+    unit: "Prise"
+steps:
+  - "Für die Gewürzmischung 1,5 TL Garam Masala mit Chilipulver und Korianderpulver mischen. Knoblauch schälen und mit Ingwer im Mörser zerstoßen."
+  - "Das Fleisch mit ½ TL der Gewürzmischung einreiben. ½ TL der Gewürzmischung mit Joghurt, einer Messerspitze Kardamompulver, 1 TL Knoblauch-Ingwer-Paste, Zitronensaft und Salz vermischen, mit dem Fleisch vermengen und 30 Minuten im Kühlschrank marinieren."
+  - "Den Backofen auf 200 °C vorheizen. Das marinierte Fleisch in eine ofenfeste Form geben und 30 Minuten im heißen Ofen garen."
+  - "Für die Sauce die Zwiebel schälen und würfeln. 2 EL Ghee im Topf erhitzen, Gewürznelken und grünen Kardamom kurz anbraten, dann die Zwiebel zugeben und goldbraun braten. Restliche Knoblauch-Ingwer-Paste, restliche Gewürzmischung, zusätzliches Garam Masala, Kardamompulver, Nelkenpulver und Salz zugeben und kurz unter Rühren mitbraten."
+  - "Die Tomaten waschen und würfeln, zugeben und anbraten, dann die Dosentomaten zufügen und etwa 10 Minuten kochen, bis die Tomaten weich sind. 3 TL Honig und Kurkumapulver unterrühren."
+  - "Die Sauce pürieren und durch ein Sieb streichen. 1 EL Ghee in einer Pfanne erhitzen, Sauce und das Fleisch aus dem Ofen dazugeben und nochmals erhitzen. Vor dem Servieren mit 1 TL flüssigem Honig beträufeln."

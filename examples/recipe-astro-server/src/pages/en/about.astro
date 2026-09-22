@@ -1,0 +1,14 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutView from '../../components/views/AboutView.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title="About - Recipe Book" description={t('about.p1')} altHref="/de/ueber-uns/">
+  <AboutView lang={lang} />
+</BaseLayout>

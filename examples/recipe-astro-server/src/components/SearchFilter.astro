@@ -1,0 +1,95 @@
+---
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+type Props = {
+  categories: string[];
+  lang: Lang;
+  totalCount: number;
+}
+
+const { categories, lang, totalCount } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="search-filter" data-count-one={t('recipes.count.one')} data-count-many={t('recipes.count.many')}>
+  <div class="controls">
+    <input
+      type="search"
+      data-search-input
+      placeholder={t('recipes.search.placeholder')}
+      aria-label={t('recipes.search.placeholder')}
+    />
+    <div class="chips" role="group">
+      <button type="button" class="chip is-active" data-category-chip="">{t('recipes.filter.all')}</button>
+      {categories.map((c) => (
+        <button type="button" class="chip" data-category-chip={c}>{t(`category.${c}` as any)}</button>
+      ))}
+    </div>
+  </div>
+  <p class="count" data-count>{totalCount} {totalCount === 1 ? t('recipes.count.one') : t('recipes.count.many')}</p>
+  <div class="grid" data-results>
+    <slot />
+  </div>
+  <p class="empty" data-empty hidden>{t('recipes.empty')}</p>
+</div>
+
+<script>
+  import '../scripts/search-filter';
+</script>
+
+<style>
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  input[data-search-input] {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .chip {
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.4rem 0 0.6rem;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+
+  .chip.is-active {
+    color: var(--color-text);
+    font-weight: 600;
+    border-bottom-color: var(--color-primary);
+  }
+
+  .count {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .empty {
+    color: var(--color-muted);
+  }
+</style>

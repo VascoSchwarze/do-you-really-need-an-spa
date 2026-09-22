@@ -1,0 +1,27 @@
+title:
+  de: "Schweinsöhrchen mit Zimt & Zucker"
+  en: "Cinnamon Sugar Palmiers"
+description:
+  de: "Knusprige Blätterteig-Röllchen mit Zimt und Zucker – schnell gemacht und perfekt zum Kaffee."
+  en: "Crispy puff pastry swirls with cinnamon and sugar – quick to make and perfect with coffee."
+category: "Dessert"
+cookTime: 30
+difficulty: 2
+servings: 4
+featured: false
+image: "/images/recipes/schweinsoehrchen-mit-zimtzucker.jpg"
+ingredients:
+  - name: "Blätterteig"
+    amount: 1
+    unit: "Rolle"
+  - name: "Zucker"
+    amount: 2
+    unit: "EL"
+  - name: "Zimt"
+    amount: 1
+    unit: "EL"
+steps:
+  - "Den Ofen auf 180 °C vorheizen."
+  - "Blätterteig zu einem Rechteck ausrollen und mit Zucker und Zimt bestreuen. Von beiden Seiten zur Mitte hin einrollen und 10 Minuten tiefkühlen."
+  - "Die Rolle in dünne Scheiben schneiden, auf ein mit Backpapier ausgelegtes Blech setzen und 15 Minuten im Ofen backen."
+  - "Lauwarm oder kalt servieren."

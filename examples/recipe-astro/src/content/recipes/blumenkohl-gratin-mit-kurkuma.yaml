@@ -1,0 +1,31 @@
+title:
+  de: "Blumenkohl-Gratin mit Kurkuma"
+  en: "Cauliflower Gratin with Turmeric"
+description:
+  de: "Goldener Blumenkohl-Auflauf mit Kurkuma, Joghurt und geriebenem Käse."
+  en: "Golden roasted cauliflower bake with turmeric, yogurt, and grated cheese."
+category: "Vegetarisch"
+cookTime: 40
+difficulty: 1
+servings: 4
+featured: true
+image: "/images/recipes/blumenkohl-gratin-mit-kurkuma.jpg"
+ingredients:
+  - name: "Blumenkohl"
+    amount: 1
+    unit: "Stück"
+  - name: "Kurkumapulver"
+    amount: 2
+    unit: "EL"
+  - name: "Griechischer Joghurt"
+    amount: 250
+    unit: "g"
+  - name: "Geriebener Käse"
+    amount: 150
+    unit: "g"
+steps:
+  - "Den Ofen auf 180 °C vorheizen."
+  - "Den in große Stücke zerteilten Blumenkohl 5 Minuten in kochendes Wasser geben."
+  - "Den Blumenkohl in einer Gratinform mit Joghurt und Kurkuma vermischen."
+  - "Salzen und pfeffern, den geriebenen Käse darüber geben."
+  - "Alles 25 Minuten im Ofen backen."

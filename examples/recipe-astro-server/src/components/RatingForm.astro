@@ -1,0 +1,108 @@
+---
+import { useTranslations } from "../i18n/utils";
+import type { Lang } from "../i18n/ui";
+
+type Props = { lang: Lang; slug: string };
+const { lang, slug } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<form
+	class="rating-form"
+	data-rating-form
+	data-label-thanks={t("rating.thanks")}
+	data-label-error={t("rating.error")}
+	data-label-unit={t("rating.unit")}
+>
+	<input type="hidden" name="slug" value={slug} />
+	<fieldset>
+		<legend>{t("rating.heading")}</legend>
+		<div class="stars" role="radiogroup" aria-label={t("rating.heading")}>
+			{
+				// Rendered 5..1: with row-reverse below, DOM order runs opposite to
+				// visual order, which is what lets the ~ (general sibling) selector in
+				// CSS light up every star down to 1, not just the one that's checked.
+				[5, 4, 3, 2, 1].map((value) => (
+					<label>
+						<input type="radio" name="rating" value={value} required />
+						<span aria-hidden="true">★</span>
+						<span class="sr-only">{value}</span>
+					</label>
+				))
+			}
+		</div>
+		<button type="submit">{t("rating.submit")}</button>
+	</fieldset>
+	<p class="rating-result" data-rating-result hidden></p>
+</form>
+
+<script>
+	import "../scripts/rating-form";
+</script>
+
+<style>
+	.rating-form fieldset {
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.rating-form legend {
+		font-weight: 600;
+		padding: 0;
+		margin-bottom: 0.5rem;
+	}
+
+	.stars {
+		display: inline-flex;
+		flex-direction: row-reverse;
+		gap: 0.15rem;
+		margin-right: 0.75rem;
+	}
+
+	.stars label {
+		cursor: pointer;
+		font-size: 1.4rem;
+		color: var(--color-border);
+	}
+
+	.stars input {
+		position: absolute;
+		opacity: 0;
+		width: 1px;
+		height: 1px;
+	}
+
+	.stars label:has(input:checked),
+	.stars label:has(input:checked) ~ label {
+		color: var(--color-primary);
+	}
+
+	.stars label:hover,
+	.stars label:hover ~ label {
+		color: var(--color-primary);
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+	}
+
+	.rating-form button {
+		background: var(--color-primary);
+		color: white;
+		border: none;
+		border-radius: var(--radius);
+		padding: 0.5rem 1rem;
+		font-weight: 600;
+	}
+
+	.rating-result {
+		margin-top: 0.75rem;
+		color: var(--color-primary-dark);
+		font-weight: 600;
+	}
+</style>

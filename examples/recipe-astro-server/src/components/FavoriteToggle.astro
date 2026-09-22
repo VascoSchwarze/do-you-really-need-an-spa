@@ -1,0 +1,42 @@
+---
+import type { Lang } from "../i18n/ui";
+
+type Props = {
+	slug: string;
+	title: string;
+	lang: Lang;
+};
+
+const { slug, title, lang } = Astro.props;
+const labelAdd = lang === "de" ? `${title} zu Favoriten hinzufügen` : `Add ${title} to favorites`;
+const labelRemove = lang === "de" ? `${title} von Favoriten entfernen` : `Remove ${title} from favorites`;
+---
+
+<button
+	type="button"
+	class="fav-btn"
+	data-slug={slug}
+	data-label-add={labelAdd}
+	data-label-remove={labelRemove}
+	aria-pressed="false"
+	aria-label={labelAdd}>♡</button
+>
+
+<script>
+	import "../scripts/favorite-toggle";
+</script>
+
+<style>
+	.fav-btn {
+		background: none;
+		border: none;
+		font-size: 1.4rem;
+		line-height: 1;
+		color: var(--color-muted);
+		padding: 0.15rem;
+	}
+
+	.fav-btn.is-active {
+		color: var(--color-primary);
+	}
+</style>

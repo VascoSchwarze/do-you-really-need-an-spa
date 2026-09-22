@@ -1,0 +1,134 @@
+---
+import { useTranslations, localizedPath } from "../../i18n/utils";
+import type { Lang } from "../../i18n/ui";
+
+type Stats = {
+	totalViews: number;
+	viewedRecipes: number;
+	totalRatings: number;
+	ratedRecipes: number;
+	lastRatedSlug: string | null;
+	lastRatedAt: Date | null;
+};
+
+type Props = {
+	lang: Lang;
+	requestedAt: Date;
+	stats: Stats;
+	topViewed: { slug: string; title: string; views: number }[];
+};
+
+const { lang, requestedAt, stats, topViewed } = Astro.props;
+const t = useTranslations(lang);
+const locale = lang === "de" ? "de-DE" : "en-US";
+---
+
+<div class="page">
+	<h1>{t("stats.title")}</h1>
+	<p class="intro">{t("stats.intro")}</p>
+	<p class="request-time">{t("stats.requestTime")}: {requestedAt.toLocaleString(locale)}</p>
+
+	<dl class="stat-grid">
+		<div>
+			<dt>{t("stats.totalViews")}</dt>
+			<dd>{stats.totalViews}</dd>
+		</div>
+		<div>
+			<dt>{t("stats.viewedRecipes")}</dt>
+			<dd>{stats.viewedRecipes}</dd>
+		</div>
+		<div>
+			<dt>{t("stats.totalRatings")}</dt>
+			<dd>{stats.totalRatings}</dd>
+		</div>
+		<div>
+			<dt>{t("stats.ratedRecipes")}</dt>
+			<dd>{stats.ratedRecipes}</dd>
+		</div>
+		<div>
+			<dt>{t("stats.lastRated")}</dt>
+			<dd>
+				{
+					stats.lastRatedSlug
+						? `${stats.lastRatedSlug} · ${stats.lastRatedAt?.toLocaleTimeString(locale)}`
+						: t("stats.lastRatedNone")
+				}
+			</dd>
+		</div>
+	</dl>
+
+	<h2>{t("stats.topViewed")}</h2>
+	{
+		topViewed.length === 0 ? (
+			<p class="hint">{t("stats.noViews")}</p>
+		) : (
+			<ol>
+				{topViewed.map((r) => (
+					<li>
+						<a href={localizedPath(lang, "recipes", r.slug)}>{r.title}</a> — {r.views} {t("server.views")}
+					</li>
+				))}
+			</ol>
+		)
+	}
+</div>
+
+<style>
+	.page h1 {
+		margin-bottom: 0.5rem;
+	}
+
+	.intro {
+		color: var(--color-muted);
+		max-width: 60ch;
+	}
+
+	.request-time {
+		font-size: 0.85rem;
+		color: var(--color-muted);
+		margin-bottom: 2rem;
+	}
+
+	.stat-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		gap: 1rem;
+		margin: 0 0 2.5rem;
+	}
+
+	.stat-grid > div {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: 1rem 1.25rem;
+	}
+
+	.stat-grid dt {
+		font-size: 0.75rem;
+		color: var(--color-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		margin-bottom: 0.35rem;
+	}
+
+	.stat-grid dd {
+		margin: 0;
+		font-family: var(--font-serif);
+		font-size: 1.4rem;
+	}
+
+	h2 {
+		margin-bottom: 0.75rem;
+	}
+
+	.hint {
+		color: var(--color-muted);
+	}
+
+	ol {
+		padding-left: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+</style>

@@ -1,0 +1,38 @@
+title:
+  de: "Weiche Schokoladentarte"
+  en: "Soft Chocolate Tart"
+description:
+  de: "Zart schmelzende Tarte mit dunkler Schokolade auf knusprigem Keksboden."
+  en: "A melt-in-your-mouth dark chocolate tart on a crunchy biscuit base."
+category: "Dessert"
+cookTime: 35
+difficulty: 3
+servings: 4
+featured: true
+image: "/images/recipes/weiche-schokoladentarte.jpg"
+ingredients:
+  - name: "Dunkle Schokolade"
+    amount: 200
+    unit: "g"
+  - name: "Butter"
+    amount: 125
+    unit: "g"
+  - name: "Eier"
+    amount: 6
+    unit: "Stück"
+  - name: "Zucker"
+    amount: 2
+    unit: "EL"
+  - name: "Schokoladenkekse"
+    amount: 300
+    unit: "g"
+  - name: "Puderzucker, zum Bestäuben"
+    amount: 1
+    unit: "EL"
+steps:
+  - "Den Ofen auf 180 °C vorheizen."
+  - "Die zerbröckelten Kekse mit der zerlassenen Butter mischen und eine Tarteform damit auskleiden."
+  - "Eier trennen. Schokolade schmelzen und mit dem Eigelb mischen. Eiweiß steif schlagen, Zucker einrieseln lassen und 5 Sekunden weiterschlagen."
+  - "Eischnee unter die Schokomischung heben und auf den Keksboden streichen."
+  - "18 Minuten im Ofen backen."
+  - "Vollständig abkühlen lassen, dann mit Puderzucker bestäuben."

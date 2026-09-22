@@ -1,0 +1,107 @@
+---
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+type Props = {
+  servings: number;
+  ingredients: { name: string; amount: number; unit: string }[];
+  lang: Lang;
+}
+
+const { servings, ingredients, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="portion-calculator" data-base-servings={servings}>
+  <div class="stepper">
+    <label for="servings-input">{t('recipe.servings')}</label>
+    <div class="stepper-controls">
+      <button type="button" data-decrement aria-label={lang === 'de' ? 'Weniger Portionen' : 'Fewer servings'}>−</button>
+      <input
+        type="number"
+        id="servings-input"
+        data-servings-input
+        min="1"
+        max="50"
+        value={servings}
+      />
+      <button type="button" data-increment aria-label={lang === 'de' ? 'Mehr Portionen' : 'More servings'}>+</button>
+    </div>
+  </div>
+
+  <ul class="ingredient-list">
+    {ingredients.map((ing) => (
+      <li>
+        <span class="amount" data-amount={ing.amount} data-unit={ing.unit}>{ing.amount} {ing.unit}</span>
+        <span>{ing.name}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  import '../scripts/portion-calculator';
+</script>
+
+<style>
+  .stepper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .stepper label {
+    font-weight: 600;
+  }
+
+  .stepper-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .stepper-controls button {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    font-size: 1rem;
+  }
+
+  #servings-input {
+    width: 7ch;
+    text-align: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.3rem;
+  }
+
+  .ingredient-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .ingredient-list li {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .amount {
+    min-width: 6.5rem;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+  }
+</style>

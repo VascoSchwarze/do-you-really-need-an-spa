@@ -1,0 +1,114 @@
+---
+import Stars from './Stars.astro';
+import FavoriteToggle from './FavoriteToggle.astro';
+import { useTranslations, localizedPath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+type Props = {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  cookTime: number;
+  difficulty: number;
+  image: string;
+  lang: Lang;
+}
+
+const { slug, title, description, category, cookTime, difficulty, image, lang } = Astro.props;
+const t = useTranslations(lang);
+const href = localizedPath(lang, 'recipes', slug);
+---
+
+<article class="recipe-card" data-title={title} data-category={category}>
+  <a href={href} class="image-link">
+    <img src={image} alt={title} loading="lazy" />
+  </a>
+  <div class="body">
+    <div class="meta-row">
+      <span class="category">{t(`category.${category}` as any)}</span>
+      <FavoriteToggle slug={slug} title={title} lang={lang} />
+    </div>
+    <h3><a href={href}>{title}</a></h3>
+    <p class="description">{description}</p>
+    <div class="footer">
+      <span>{cookTime} {t('recipe.minutes')}</span>
+      <Stars level={difficulty} lang={lang} />
+    </div>
+  </div>
+</article>
+
+<style>
+  .recipe-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .recipe-card[hidden] {
+    display: none;
+  }
+
+  .image-link {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .image-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .body {
+    padding: 1rem 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary-dark);
+    font-weight: 600;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  h3 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .description {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin: 0;
+    flex: 1;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-top: 0.3rem;
+  }
+</style>

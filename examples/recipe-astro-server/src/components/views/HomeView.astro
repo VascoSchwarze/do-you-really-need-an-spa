@@ -1,0 +1,82 @@
+---
+import RecipeCard from '../RecipeCard.astro';
+import { useTranslations, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  lang: Lang;
+  featured: CollectionEntry<'recipes'>[];
+}
+
+const { lang, featured } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero">
+  <h1>{t('home.title')}</h1>
+  <p>{t('home.subtitle')}</p>
+  <a href={localizedPath(lang, 'recipes')} class="cta">{t('home.cta')}</a>
+</section>
+
+<section class="featured">
+  <h2>{t('home.featured')}</h2>
+  <div class="grid">
+    {featured.map((r) => (
+      <RecipeCard
+        slug={r.id}
+        title={r.data.title[lang]}
+        description={r.data.description[lang]}
+        category={r.data.category}
+        cookTime={r.data.cookTime}
+        difficulty={r.data.difficulty}
+        image={r.data.image}
+        lang={lang}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero {
+    max-width: 560px;
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero p {
+    color: var(--color-muted);
+  }
+
+  .cta {
+    display: inline-block;
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius);
+    margin-top: 0.5rem;
+  }
+
+  .cta:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  .featured h2 {
+    margin-bottom: 1rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+</style>

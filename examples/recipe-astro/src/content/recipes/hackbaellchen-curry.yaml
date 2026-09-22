@@ -1,0 +1,80 @@
+title:
+  de: "Hackbällchen-Curry"
+  en: "Meatball Curry"
+description:
+  de: "Würziges Hackbällchen-Curry mit Kartoffeln in einer aromatischen Tomaten-Gewürzsauce."
+  en: "A spiced meatball curry with potatoes in an aromatic tomato-spice sauce."
+category: "Fleisch"
+cookTime: 80
+difficulty: 3
+servings: 4
+featured: false
+image: "/images/recipes/hackbaellchen-curry.jpg"
+ingredients:
+  - name: "Zwiebel, für die Hackfleischmischung"
+    amount: 0.5
+    unit: "Stück"
+  - name: "Grüne Chilischote"
+    amount: 1
+    unit: "Stück"
+  - name: "Gemischtes Hackfleisch"
+    amount: 500
+    unit: "g"
+  - name: "Koriandergrün, gehackt"
+    amount: 3
+    unit: "EL"
+  - name: "Garam Masala, gemahlen"
+    amount: 2
+    unit: "TL"
+  - name: "Kurkumapulver, für die Paste"
+    amount: 0.5
+    unit: "TL"
+  - name: "Kreuzkümmelpulver"
+    amount: 2
+    unit: "TL"
+  - name: "Rosenpaprika"
+    amount: 1
+    unit: "TL"
+  - name: "Chilipulver"
+    amount: 0.5
+    unit: "TL"
+  - name: "Korianderpulver"
+    amount: 1
+    unit: "TL"
+  - name: "Nelkenpulver"
+    amount: 1
+    unit: "Msp."
+  - name: "Zwiebel, für die Sauce"
+    amount: 1
+    unit: "Stück"
+  - name: "Knoblauchzehen"
+    amount: 2
+    unit: "Stück"
+  - name: "Grüne Chilischoten, für die Sauce"
+    amount: 2
+    unit: "Stück"
+  - name: "Ghee"
+    amount: 2
+    unit: "EL"
+  - name: "Ingwer, gehackt"
+    amount: 1
+    unit: "TL"
+  - name: "Tomaten"
+    amount: 3
+    unit: "Stück"
+  - name: "Kartoffeln, mittelgroß"
+    amount: 3
+    unit: "Stück"
+  - name: "Geschälte Tomaten, Dose"
+    amount: 400
+    unit: "g"
+  - name: "Tomatenmark"
+    amount: 1.5
+    unit: "EL"
+steps:
+  - "Für die Hackfleischmischung die Zwiebel schälen und fein würfeln, die Chilischote waschen, entkernen und fein würfeln. Das Hackfleisch mit Zwiebel, Chilischote, Koriandergrün, Garam Masala und etwas Salz vermischen."
+  - "Für die Paste Kurkumapulver, Kreuzkümmelpulver, Rosenpaprika, Chilipulver, Korianderpulver, Nelkenpulver und 1 TL Garam Masala mit etwas Wasser verrühren, bis eine dicke Paste entsteht."
+  - "Für die Sauce Zwiebel und Knoblauch schälen und fein würfeln, die Chilischoten waschen, entkernen und hacken. Ghee erhitzen und die Zwiebel darin goldbraun anbraten. Ingwer, Chilis und Knoblauch zugeben und weitere 5 Minuten braten."
+  - "Die Paste zugeben und bei mittlerer Hitze etwa 10 Minuten anbräunen. Bei Bedarf etwas Wasser zugießen, damit die Gewürze nicht verbrennen."
+  - "Die frischen Tomaten hacken, die Kartoffeln schälen und vierteln. Frische Tomaten, Dosentomaten und Tomatenmark zur Sauce geben, bis diese dickflüssig ist."
+  - "Kleine Hackfleischbällchen formen und vorsichtig in die Sauce geben. Kartoffelstücke hinzufügen, mit Salz abschmecken und etwa 45 Minuten köcheln lassen. Vor dem Servieren nochmals abschmecken."

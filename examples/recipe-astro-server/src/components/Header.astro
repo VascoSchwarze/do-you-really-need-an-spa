@@ -1,0 +1,113 @@
+---
+import { useTranslations, localizedPath } from "../i18n/utils";
+import type { Lang } from "../i18n/ui";
+
+type Props = {
+	lang: Lang;
+	altHref: string;
+};
+
+const { lang, altHref } = Astro.props;
+const t = useTranslations(lang);
+
+const pathname = Astro.url.pathname;
+const homeHref = localizedPath(lang, "home");
+const recipesHref = localizedPath(lang, "recipes");
+const aboutHref = localizedPath(lang, "about");
+const statsHref = localizedPath(lang, "stats");
+
+const isHomeActive = pathname === homeHref;
+const isRecipesActive = pathname.startsWith(recipesHref);
+const isAboutActive = pathname === aboutHref;
+const isStatsActive = pathname === statsHref;
+---
+
+<header class="site-header">
+	<div class="inner">
+		<a href={homeHref} class="brand">{t("brand")}</a>
+		<nav aria-label="Hauptnavigation">
+			<a
+				href={homeHref}
+				class={isHomeActive ? "active" : undefined}
+				aria-current={isHomeActive ? "page" : undefined}>{t("nav.home")}</a
+			>
+			<a
+				href={recipesHref}
+				class={isRecipesActive ? "active" : undefined}
+				aria-current={isRecipesActive ? "page" : undefined}>{t("nav.recipes")}</a
+			>
+			<a
+				href={aboutHref}
+				class={isAboutActive ? "active" : undefined}
+				aria-current={isAboutActive ? "page" : undefined}>{t("nav.about")}</a
+			>
+			<a
+				href={statsHref}
+				class={isStatsActive ? "active" : undefined}
+				aria-current={isStatsActive ? "page" : undefined}>{t("nav.stats")}</a
+			>
+			<a href={altHref} id="lang-switch" hreflang={lang === "de" ? "en" : "de"}>
+				{lang === "de" ? "EN" : "DE"}
+			</a>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		position: sticky;
+		top: 0;
+		z-index: 10;
+	}
+
+	.inner {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 1rem 1.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.brand {
+		font-family: var(--font-serif);
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+	}
+
+	nav a {
+		color: var(--color-muted);
+		text-decoration: none;
+		font-weight: 500;
+		padding-bottom: 0.25rem;
+		border-bottom: 2px solid transparent;
+	}
+
+	nav a:hover {
+		color: var(--color-text);
+	}
+
+	nav a.active {
+		color: var(--color-primary-dark);
+		border-bottom-color: var(--color-primary);
+	}
+
+	#lang-switch {
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: 0.2rem 0.6rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+	}
+</style>

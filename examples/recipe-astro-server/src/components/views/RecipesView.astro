@@ -1,0 +1,41 @@
+---
+import RecipeCard from '../RecipeCard.astro';
+import SearchFilter from '../SearchFilter.astro';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  lang: Lang;
+  recipes: CollectionEntry<'recipes'>[];
+  categories: string[];
+}
+
+const { lang, recipes, categories } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="page">
+  <h1>{t('recipes.title')}</h1>
+
+  <SearchFilter categories={categories} lang={lang} totalCount={recipes.length}>
+    {recipes.map((r) => (
+      <RecipeCard
+        slug={r.id}
+        title={r.data.title[lang]}
+        description={r.data.description[lang]}
+        category={r.data.category}
+        cookTime={r.data.cookTime}
+        difficulty={r.data.difficulty}
+        image={r.data.image}
+        lang={lang}
+      />
+    ))}
+  </SearchFilter>
+</div>
+
+<style>
+  .page h1 {
+    margin-bottom: 1rem;
+  }
+</style>
