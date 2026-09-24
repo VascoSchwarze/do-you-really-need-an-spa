@@ -297,6 +297,10 @@
 					</aside>
 				</section>
 
+				<section>
+					<img src="assets/metriken-meme.jpg" />
+				</section>
+
 				<section data-auto-animate>
 					<h3>Lässt sich das messen?</h3>
 				</section>
@@ -1278,18 +1282,38 @@ import ExampleText from "./ExampleText.astro";
 					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate>
 					<h3>Props</h3>
-					<!-- TODO Zweite Spalte mit Bsp hinzufügen -->
-					<div>
-						<pre><code data-trim data-noescape data-line-numbers class="language-astro r-stretch">---
+					<div class="two-col">
+						<div>
+							<h4 style="text-transform: none">ExampleText.astro</h4>
+							<pre
+								data-id="code"
+								style="width: 100%"
+							><code data-trim data-noescape data-line-numbers class="language-astro r-stretch">---
 type Props = {
-  lang: Lang;
-  recipe: Recipe;
+  text: string;
 }
 
-const { lang, recipe } = Astro.props;
----</code></pre>
+const { text } = Astro.props;
+---
+
+&lt;p class="text"&gt;
+	{text}
+&lt;/div&gt;</code></pre>
+						</div>
+						<div>
+							<h4 style="text-transform: none">RecipesPage.astro</h4>
+							<pre
+								data-id="code2"
+								style="width: 100%"
+							><code data-trim data-noescape data-line-numbers class="language-astro r-stretch">---
+import ExampleText from "./ExampleText.astro";
+---
+
+&lt;ExampleText text={"etwas Text"} /&gt;
+</code></pre>
+						</div>
 					</div>
 					<aside class="notes">
 						<ul>
@@ -1901,12 +1925,11 @@ const { recipe } = Astro.props;
 					<iframe src="http://localhost:5175/de/rezepte/butter-chicken" class="r-stretch"></iframe>
 				</section>
 
-				<!-- TODO: Highlighted line numbers checken -->
 				<section data-auto-animate>
 					<h3>Kochmodus-Checkliste</h3>
 					<pre
 						data-id="code"
-					><code data-trim data-noescape data-line-numbers="|9-16|36-43|45-60|64-72">---
+					><code data-trim data-noescape data-line-numbers="|9-14,16|45-60|64-72">---
 import Stars from "../Stars.astro";
 import FavoriteToggle from "../FavoriteToggle.astro";
 import PortionCalculator from "../PortionCalculator.astro";
@@ -2243,6 +2266,10 @@ document.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(initFavoriteTog
 				</section>
 
 				<section>
+					<img src="assets/react-at-home-meme.jpg" />
+				</section>
+
+				<section>
 					<h2>Fazit</h2>
 					<h3 class="fragment">Interaktivität geht auch ohne Framework!</h3>
 					<aside class="notes">
@@ -2258,7 +2285,7 @@ document.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(initFavoriteTog
 							</li>
 							<li>
 								Punkt: nicht "Vanilla ist immer richtig", sondern bewusste Abwägung statt
-								Reflex — dieselbe Frage wie im gesamten Talk
+								Reflex
 							</li>
 						</ul>
 					</aside>
