@@ -19,6 +19,7 @@ const deck = new Reveal({
 	controls: "speaker",
 	controlsTutorial: false,
 	slideNumber: true,
+	pdfSeparateFragments: false,
 });
 
 deck.initialize();
